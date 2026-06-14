@@ -15,8 +15,8 @@ const services = [
 export default function Home() {
   return <>
     <section className="relative min-h-[720px] overflow-hidden bg-ink text-white">
-      <Image src="/images/hero-starthome.png" alt="Villa contemporanea nel territorio veneto" fill priority className="object-cover object-center" sizes="100vw"/>
-      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/5"/>
+      <Image src="/images/hero-starthome-v2.webp" alt="Architettura contemporanea italiana al tramonto" fill priority className="object-cover object-[62%_center] sm:object-center" sizes="100vw"/>
+      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-transparent"/>
       <div className="container-site relative flex min-h-[720px] items-center py-24">
         <div className="max-w-3xl">
           <p className="eyebrow">Immobiliare tra Padova e Venezia</p>
