@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
-export function LeadForm({ type = "contact", property }: { type?: "contact" | "valuation" | "visit"; property?: string }) {
+export function LeadForm({ type = "contact", property, context, messagePlaceholder }: { type?: "contact" | "valuation" | "visit"; property?: string; context?: string; messagePlaceholder?: string }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -19,6 +19,7 @@ export function LeadForm({ type = "contact", property }: { type?: "contact" | "v
         body: JSON.stringify({
           type,
           property,
+          context,
           ...Object.fromEntries(new FormData(e.currentTarget)),
         }),
       });
@@ -39,7 +40,7 @@ export function LeadForm({ type = "contact", property }: { type?: "contact" | "v
     <div className="grid gap-4 sm:grid-cols-2"><div><label className="label" htmlFor={`${type}-name`}>Nome e cognome</label><input id={`${type}-name`} name="nome" className="field" required placeholder="Mario Rossi"/></div><div><label className="label" htmlFor={`${type}-phone`}>Telefono</label><input id={`${type}-phone`} name="telefono" className="field" required type="tel" placeholder="+39"/></div></div>
     <div><label className="label" htmlFor={`${type}-email`}>Email</label><input id={`${type}-email`} name="email" className="field" required type="email" placeholder="nome@email.it"/></div>
     {type === "valuation" && <div className="grid gap-4 sm:grid-cols-2"><div><label className="label" htmlFor="city">Comune immobile</label><input id="city" name="comune" className="field" required placeholder="Es. Vigonza"/></div><div><label className="label" htmlFor="property-type">Tipologia</label><select id="property-type" name="tipologia" className="field"><option>Appartamento</option><option>Villa</option><option>Casa indipendente</option><option>Terreno</option><option>Altro</option></select></div></div>}
-    <div><label className="label" htmlFor={`${type}-message`}>Messaggio</label><textarea id={`${type}-message`} name="messaggio" rows={4} className="field h-auto py-3" placeholder={type === "valuation" ? "Superficie, stato, piano e altre informazioni utili..." : "Come possiamo aiutarti?"}/></div>
+    <div><label className="label" htmlFor={`${type}-message`}>Messaggio</label><textarea id={`${type}-message`} name="messaggio" rows={4} className="field h-auto py-3" placeholder={messagePlaceholder || (type === "valuation" ? "Superficie, stato, piano e altre informazioni utili..." : "Come possiamo aiutarti?")}/></div>
     <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Acconsento al trattamento dei dati personali secondo la Privacy Policy.</label>
     {error && <p role="alert" className="rounded-sm bg-red-50 p-4 text-sm text-red-800">{error}</p>}
     <button className="btn-primary w-full disabled:cursor-wait disabled:opacity-60" type="submit" disabled={sending}>

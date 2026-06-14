@@ -31,6 +31,7 @@ export async function POST(request: Request) {
     const telefono = clean(body.telefono, 50);
     const email = clean(body.email, 160);
     const immobile = clean(body.immobile || body.property, 200);
+    const context = clean(body.context, 240);
     const comune = clean(body.comune, 120);
     const tipologia = clean(body.tipologia, 80);
     const messaggio = clean(body.messaggio);
@@ -55,6 +56,7 @@ export async function POST(request: Request) {
       ["Telefono", telefono],
       ["Email", email],
       ["Immobile", immobile],
+      ["Provenienza", context],
       ["Comune", comune],
       ["Tipologia", tipologia],
       ["Messaggio", messaggio],
