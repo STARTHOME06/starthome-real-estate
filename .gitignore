@@ -9,6 +9,8 @@
 /work
 /outputs
 *.tsbuildinfo
+__pycache__/
+*.pyc
 
 # Environment files
 .env*

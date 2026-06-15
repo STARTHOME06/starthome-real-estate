@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export>
+  <annuncio>
+    <info>
+      <id>14503</id>
+      <agency_code>SH-TEST</agency_code>
+      <deleted>0</deleted>
+      <flag_storico>0</flag_storico>
+      <flag_vetrina>1</flag_vetrina>
+      <flag_carosello>0</flag_carosello>
+      <mq>121</mq>
+      <price>285000</price>
+      <description><![CDATA[Appartamento <strong>luminoso</strong> con terrazza.]]></description>
+      <provincia>Padova</provincia>
+      <comune>Vigonza</comune>
+      <zona>Centro</zona>
+      <indirizzo>Via Roma, 45</indirizzo>
+      <last_editor_time>2026-06-15 09:00:00</last_editor_time>
+      <categorie_id>11</categorie_id>
+      <categorie_micro_id>47</categorie_micro_id>
+    </info>
+    <info_inserite>
+      <info id="1"><id>1</id><valore_assegnato>2</valore_assegnato></info>
+      <info id="9"><id>9</id><valore_assegnato>1</valore_assegnato></info>
+      <info id="13"><id>13</id><valore_assegnato>1</valore_assegnato></info>
+      <info id="33"><id>33</id><valore_assegnato>2</valore_assegnato></info>
+      <info id="55"><id>55</id><valore_assegnato>10</valore_assegnato></info>
+      <info id="65"><id>65</id><valore_assegnato>4</valore_assegnato></info>
+    </info_inserite>
+    <file_allegati/>
+  </annuncio>
+</export>

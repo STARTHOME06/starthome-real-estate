@@ -1,3 +1,5 @@
+import giProperties from "@/data/gi-properties.json";
+
 export const cities = [
   "Vigonza", "Pianiga", "Dolo", "Campodarsego", "Cadoneghe",
   "Noventa Padovana", "Villanova di Camposampiero", "Noale", "Scorze'",
@@ -19,11 +21,18 @@ export type Property = {
   floor: string;
   energy: string;
   image: string;
+  images?: string[];
+  floorplans?: string[];
   featured?: boolean;
   description: string;
+  address?: string;
+  latitude?: number | null;
+  longitude?: number | null;
+  updatedAt?: string;
+  source?: "gestionale";
 };
 
-export const properties: Property[] = [
+const demoProperties: Property[] = [
   {
     id: "SH-101", slug: "appartamento-design-centro-vigonza",
     title: "Appartamento di design in centro", city: "Vigonza", zone: "Centro",
@@ -73,6 +82,10 @@ export const properties: Property[] = [
     description: "Bilocale moderno con ottima esposizione, arredamento completo e posto auto. Perfetto per professionisti.",
   },
 ];
+
+const syncedProperties = giProperties as Property[];
+
+export const properties: Property[] = syncedProperties.length ? syncedProperties : demoProperties;
 
 export const formatPrice = (property: Property) =>
   property.contract === "affitto"
