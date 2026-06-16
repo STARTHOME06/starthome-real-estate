@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CTA } from "@/components/CTA";
-import { LeadForm } from "@/components/Forms";
+import { LeadForm, PropertyAlertForm } from "@/components/Forms";
 import { Icon } from "@/components/Icons";
 import { MortgageSimulator } from "@/components/MortgageSimulator";
 import { PropertyFeatureBadges } from "@/components/PropertyFeatures";
 import { formatPrice, properties } from "@/lib/data";
 import { googleMapsEmbedUrl, googleMapsLink } from "@/lib/maps";
+import { nearbyServices } from "@/lib/market";
 import { site, whatsappUrl } from "@/lib/site";
 
 export function generateStaticParams() { return properties.map(p => ({ slug: p.slug })); }
@@ -38,7 +39,13 @@ export default async function Page({ params }: { params: Promise<{slug:string}> 
           </div>
           <div className="overflow-hidden bg-mist"><iframe title={`Mappa ${p.city}`} className="h-80 w-full border-0 grayscale" loading="lazy" src={googleMapsEmbedUrl(p)}/></div>
         </div>
+        <div className="mt-10 bg-sand p-7 sm:p-9">
+          <p className="eyebrow">Servizi vicini</p>
+          <h2 className="font-serif text-3xl font-semibold">Cosa valutare nella zona</h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">{nearbyServices(p.city, p.zone).map((service)=><p key={service} className="flex gap-3 text-sm leading-7 text-ink/65"><span className="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gold text-white"><Icon name="check" className="h-3.5 w-3.5"/></span>{service}</p>)}</div>
+          <p className="mt-5 text-xs leading-5 text-ink/45">Le informazioni sono indicative: durante la visita ti aiutiamo a leggere collegamenti, servizi e caratteristiche della microzona.</p>
+        </div>
       </article>
-      <aside><div className="sticky top-32"><div className="border border-ink/10 bg-white p-7 shadow-soft"><h2 className="font-serif text-3xl font-semibold">Vuoi visitarlo?</h2><p className="mb-6 mt-2 text-sm text-ink/55">Lascia i tuoi recapiti. Ti richiamiamo per concordare giorno e orario.</p><LeadForm type="visit" property={`${p.id} - ${p.title}`}/><div className="mt-4 grid grid-cols-2 gap-3"><a className="btn-outline gap-2 px-3" href={`tel:${site.phoneHref}`}><Icon name="phone"/> Chiama</a><a className="btn-dark px-3" target="_blank" rel="noreferrer" href={whatsappUrl(`Buongiorno STARTHOME REAL ESTATE, vorrei informazioni sull'immobile ${p.id}.`)}>WhatsApp</a></div></div>{p.contract === "vendita" && <MortgageSimulator price={p.price}/>}</div></aside>
+      <aside><div className="sticky top-32"><div className="border border-ink/10 bg-white p-7 shadow-soft"><h2 className="font-serif text-3xl font-semibold">Vuoi visitarlo?</h2><p className="mb-6 mt-2 text-sm text-ink/55">Lascia i tuoi recapiti. Ti richiamiamo per concordare giorno e orario.</p><LeadForm type="visit" property={`${p.id} - ${p.title}`}/><div className="mt-4 grid grid-cols-2 gap-3"><a className="btn-outline gap-2 px-3" href={`tel:${site.phoneHref}`}><Icon name="phone"/> Chiama</a><a className="btn-dark px-3" target="_blank" rel="noreferrer" href={whatsappUrl(`Buongiorno STARTHOME REAL ESTATE, vorrei informazioni sull'immobile ${p.id}.`)}>WhatsApp</a></div></div><div className="mt-6 border border-gold/30 bg-sand p-6"><h2 className="font-serif text-2xl font-semibold">Vuoi immobili simili?</h2><p className="mb-5 mt-2 text-sm leading-6 text-ink/55">Ti avvisiamo quando arriva una soluzione coerente con questa.</p><PropertyAlertForm property={`${p.id} - ${p.title}`}/></div>{p.contract === "vendita" && <MortgageSimulator price={p.price}/>}</div></aside>
     </div></section><CTA/></>;
 }

@@ -4,6 +4,8 @@ const labels: Record<string, string> = {
   contact: "Richiesta informazioni",
   valuation: "Richiesta valutazione gratuita",
   visit: "Richiesta visita immobile",
+  buyer: "Richiesta ricerca casa",
+  alert: "Richiesta alert nuovi immobili",
 };
 
 function clean(value: unknown, maxLength = 2000) {
@@ -34,6 +36,16 @@ export async function POST(request: Request) {
     const context = clean(body.context, 240);
     const comune = clean(body.comune, 120);
     const tipologia = clean(body.tipologia, 80);
+    const budget = clean(body.budget, 80);
+    const camere = clean(body.camere, 80);
+    const urgenza = clean(body.urgenza, 120);
+    const mutuo = clean(body.mutuo, 80);
+    const mq = clean(body.mq, 80);
+    const piano = clean(body.piano, 80);
+    const stato = clean(body.stato, 120);
+    const garage = clean(body.garage, 80);
+    const giardino = clean(body.giardino, 80);
+    const tempi = clean(body.tempi, 120);
     const messaggio = clean(body.messaggio);
 
     if (!nome || !telefono || !email || !email.includes("@")) {
@@ -59,6 +71,16 @@ export async function POST(request: Request) {
       ["Provenienza", context],
       ["Comune", comune],
       ["Tipologia", tipologia],
+      ["Budget", budget],
+      ["Camere", camere],
+      ["Urgenza", urgenza],
+      ["Mutuo", mutuo],
+      ["MQ", mq],
+      ["Piano", piano],
+      ["Stato immobile", stato],
+      ["Garage", garage],
+      ["Giardino", giardino],
+      ["Tempi", tempi],
       ["Messaggio", messaggio],
     ].filter(([, value]) => value);
 
