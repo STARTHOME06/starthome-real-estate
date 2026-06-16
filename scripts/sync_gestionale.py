@@ -105,9 +105,13 @@ def safe_extract(archive: tarfile.TarFile, destination: Path) -> None:
     archive.extractall(destination)
 
 
-def download(url: str, destination: Path) -> None:
+def log(message: str) -> None:
+    print(message, flush=True)
+
+
+def download(url: str, destination: Path, timeout: int = 90) -> None:
     request = urllib.request.Request(url, headers={"User-Agent": "STARTHOME-feed-sync/1.0"})
-    with urllib.request.urlopen(request, timeout=90) as response, destination.open("wb") as output:
+    with urllib.request.urlopen(request, timeout=timeout) as response, destination.open("wb") as output:
         shutil.copyfileobj(response, output)
 
 
@@ -138,6 +142,9 @@ def image_extension(url: str) -> str:
 def sync_images(announcement: ET.Element, property_id: str, allow_download: bool) -> tuple[list[str], list[str]]:
     photos: list[str] = []
     floorplans: list[str] = []
+    if not allow_download:
+        return photos, floorplans
+
     IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 
     for index, attachment in enumerate(announcement.findall("./file_allegati/allegato"), start=1):
@@ -149,9 +156,9 @@ def sync_images(announcement: ET.Element, property_id: str, allow_download: bool
         destination = IMAGE_DIR / filename
         if allow_download and not destination.exists():
             try:
-                download(url, destination)
+                download(url, destination, timeout=25)
             except Exception as error:
-                print(f"Avviso: immagine non scaricata {url}: {error}")
+                log(f"Avviso: immagine non scaricata {url}: {error}")
                 continue
         if not destination.exists() and allow_download:
             continue
@@ -165,6 +172,7 @@ def parse_feed(xml_path: Path, allow_image_download: bool) -> list[dict]:
     root = ET.parse(xml_path).getroot()
     announcements = [root] if root.tag == "annuncio" else root.findall(".//annuncio")
     properties: list[dict] = []
+    log(f"Trovati {len(announcements)} annunci nel feed")
 
     for announcement in announcements:
         info = announcement.find("./info")
@@ -262,19 +270,26 @@ def main() -> None:
         feed_url = os.environ.get("GI_FEED_URL", "").strip()
         if not feed_url:
             raise SystemExit("Variabile GI_FEED_URL mancante")
+        download_images = os.environ.get("GI_DOWNLOAD_IMAGES", "").strip() == "1"
         with tempfile.TemporaryDirectory(prefix="gi-feed-") as temp_name:
             temp = Path(temp_name)
             archive_path = temp / "feed.tar.gz"
             try:
+                log("Scarico il feed del gestionale")
                 download(add_feed_options(feed_url), archive_path)
             except Exception as error:
                 raise SystemExit(f"Download feed fallito: {type(error).__name__}") from None
+            log("Feed scaricato, estraggo l'archivio")
             with tarfile.open(archive_path, "r:gz") as archive:
                 safe_extract(archive, temp)
             xml_files = list(temp.rglob("*.xml"))
             if not xml_files:
                 raise SystemExit("Nessun XML trovato nel feed")
-            properties = parse_feed(xml_files[0], True)
+            if download_images:
+                log("Download immagini abilitato")
+            else:
+                log("Download immagini disattivato: uso immagini provvisorie del sito")
+            properties = parse_feed(xml_files[0], download_images)
 
     if not properties:
         raise SystemExit("Il feed non contiene annunci pubblicabili: dati esistenti non modificati")
