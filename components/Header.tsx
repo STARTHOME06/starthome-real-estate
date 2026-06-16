@@ -8,7 +8,7 @@ import { Icon } from "./Icons";
 
 const nav = [
   ["Vendita", "/immobili-in-vendita"], ["Affitto", "/immobili-in-affitto"],
-  ["Valuta casa", "/valutazione"], ["Servizi", "/servizi"],
+  ["Vendi casa", "/vendere-casa"], ["Valuta casa", "/valutazione"], ["Servizi", "/servizi"],
   ["Chi siamo", "/chi-siamo"], ["Guide", "/blog"], ["Contatti", "/contatti"],
 ];
 

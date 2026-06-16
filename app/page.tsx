@@ -8,9 +8,15 @@ import { blogPosts } from "@/lib/blog";
 import { cities, properties } from "@/lib/data";
 
 const services = [
-  ["Valutazione accurata", "Analisi comparativa, dati di mercato e conoscenza locale per definire il giusto posizionamento."],
-  ["Vendita strategica", "Presentazione premium, promozione multicanale e gestione qualificata di ogni potenziale acquirente."],
-  ["Ricerca su misura", "Ascoltiamo esigenze reali e selezioniamo solo opportunità coerenti con il tuo progetto."],
+  ["Prezzo corretto", "Non inseguiamo numeri a caso: analizziamo dati, domanda reale e microzona per difendere il valore."],
+  ["Marketing premium", "Foto, testi, portali, database clienti e comunicazione curata per far emergere l’immobile giusto."],
+  ["Trattativa guidata", "Selezioniamo i contatti, gestiamo visite e negoziazione, proteggendo tempi, prezzo e serenità."],
+];
+
+const proofPoints = [
+  ["53", "immobili sincronizzati dal gestionale"],
+  ["15", "zone presidiate tra Padova, Riviera e Miranese"],
+  ["24", "planimetrie già disponibili negli annunci"],
 ];
 
 export default function Home() {
@@ -22,8 +28,9 @@ export default function Home() {
         <div className="max-w-3xl">
           <p className="eyebrow">Immobiliare tra Padova e Venezia</p>
           <h1 className="display-title max-w-2xl">La tua casa.<br/><span className="italic text-gold">La nostra passione.</span></h1>
-          <p className="mt-7 max-w-xl text-lg leading-8 text-white/75">Vendiamo, affittiamo e valorizziamo immobili con competenza locale, cura dei dettagli e una strategia costruita intorno a te.</p>
-          <div className="mt-9 flex flex-wrap gap-3"><Link className="btn-primary" href="/immobili-in-vendita">Scopri gli immobili</Link><Link className="btn-outline border-white/30 bg-white/5 text-white backdrop-blur" href="/valutazione">Valuta la tua casa</Link></div>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-white/75">Vendere, comprare o affittare casa non è solo pubblicare un annuncio. È scegliere prezzo, strategia, tempi e persone giuste. Noi lo facciamo con metodo, presenza e una cura quasi artigianale.</p>
+          <div className="mt-9 flex flex-wrap gap-3"><Link className="btn-primary" href="/valutazione">Richiedi una valutazione gratuita</Link><Link className="btn-outline border-white/30 bg-white/5 text-white backdrop-blur" href="/immobili-in-vendita">Scopri gli immobili</Link><Link className="btn-outline border-white/30 bg-white/5 text-white backdrop-blur" href="/vendere-casa">Vendi con STARTHOME</Link></div>
+          <div className="mt-10 grid max-w-2xl gap-px bg-white/15 sm:grid-cols-3">{proofPoints.map(([value,label]) => <div key={label} className="bg-ink/45 p-5 backdrop-blur"><strong className="font-serif text-4xl text-gold">{value}</strong><p className="mt-2 text-xs font-semibold uppercase tracking-wider text-white/65">{label}</p></div>)}</div>
         </div>
       </div>
       <div className="container-site relative -mt-24 translate-y-1/2"><SearchPanel/></div>
@@ -35,11 +42,11 @@ export default function Home() {
       </div>
     </section>
     <section className="bg-sand py-24"><div className="container-site grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
-      <div><p className="eyebrow">Una scelta importante merita metodo</p><h2 className="section-title">Più valore alla tua casa, più serenità per te.</h2><p className="mt-6 leading-8 text-ink/60">STARTHOME nasce per offrire un modo più attento e trasparente di vivere l’immobiliare. Un unico consulente, un piano chiaro, aggiornamenti costanti.</p><Link href="/chi-siamo" className="btn-dark mt-8">Conosci STARTHOME</Link></div>
+      <div><p className="eyebrow">Una scelta importante merita metodo</p><h2 className="section-title">Più valore alla tua casa, più serenità per te.</h2><p className="mt-6 leading-8 text-ink/60">STARTHOME nasce per dare al cliente un’esperienza immobiliare più chiara, più curata e più efficace. Prima ascoltiamo l’obiettivo, poi costruiamo un piano: valutazione, presentazione, promozione, visite e trattativa.</p><div className="mt-8 flex flex-wrap gap-3"><Link href="/vendere-casa" className="btn-dark">Scopri il metodo vendita</Link><Link href="/chi-siamo" className="btn-outline">Conosci STARTHOME</Link></div></div>
       <div className="grid gap-px bg-ink/10 sm:grid-cols-3">{services.map(([title,text], i) => <div key={title} className="bg-white p-7"><span className="font-serif text-5xl text-gold/35">0{i+1}</span><h3 className="mt-8 font-serif text-2xl font-semibold">{title}</h3><p className="mt-4 text-sm leading-7 text-ink/55">{text}</p></div>)}</div>
     </div></section>
     <section className="bg-ink py-20 text-white"><div className="container-site">
-      <div className="mb-10 max-w-3xl"><p className="eyebrow">Oltre la compravendita</p><h2 className="section-title">Tutto ciò che serve<br/>per il tuo progetto casa.</h2><p className="mt-5 leading-8 text-white/60">Quando serve, attiviamo una rete selezionata di professionisti esterni e competenze locali.</p></div>
+      <div className="mb-10 max-w-3xl"><p className="eyebrow">Oltre la compravendita</p><h2 className="section-title">Un unico riferimento.<br/>Più soluzioni intorno a te.</h2><p className="mt-5 leading-8 text-white/60">Quando serve, coordiniamo professionisti esterni e competenze locali: dal mutuo alla valorizzazione degli ambienti, con la regia di un consulente immobiliare presente.</p></div>
       <div className="grid gap-px bg-white/10 md:grid-cols-2">
         <article className="bg-[#20212d] p-8 sm:p-10"><p className="text-xs font-bold uppercase tracking-[.2em] text-gold">Partner finanziari</p><h3 className="mt-6 font-serif text-3xl font-semibold">Consulenza mutui</h3><p className="mt-4 max-w-xl text-sm leading-7 text-white/60">Facilitiamo il contatto con consulenti del credito e intermediari abilitati esterni, per valutare con chiarezza la sostenibilità e le possibili soluzioni di finanziamento.</p></article>
         <article className="bg-[#20212d] p-8 sm:p-10"><p className="text-xs font-bold uppercase tracking-[.2em] text-gold">Saper fare locale</p><h3 className="mt-6 font-serif text-3xl font-semibold">Arredo casa su misura</h3><p className="mt-4 max-w-xl text-sm leading-7 text-white/60">Collaboriamo con artigiani locali e professionisti del territorio per progettare cucine, arredi e ambienti personalizzati, funzionali e coerenti con la tua casa.</p></article>
