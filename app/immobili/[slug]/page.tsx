@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { CTA } from "@/components/CTA";
 import { LeadForm } from "@/components/Forms";
 import { Icon } from "@/components/Icons";
+import { MortgageSimulator } from "@/components/MortgageSimulator";
 import { formatPrice, properties } from "@/lib/data";
+import { googleMapsEmbedUrl, googleMapsLink } from "@/lib/maps";
 import { site, whatsappUrl } from "@/lib/site";
 
 export function generateStaticParams() { return properties.map(p => ({ slug: p.slug })); }
@@ -22,8 +24,19 @@ export default async function Page({ params }: { params: Promise<{slug:string}> 
         <h2 className="font-serif text-3xl font-semibold">Descrizione</h2><p className="mt-5 max-w-3xl leading-8 text-ink/65">{p.description}</p>
         <div className="mt-10 grid gap-4 border-y border-ink/10 py-8 sm:grid-cols-2"><p><strong>Piano:</strong> {p.floor}</p><p><strong>Tipologia:</strong> {p.type}</p><p><strong>Zona:</strong> {p.zone}</p><p><strong>Riferimento:</strong> {p.id}</p></div>
         {p.images && p.images.length > 1 && <div className="mt-10"><h2 className="font-serif text-3xl font-semibold">Galleria</h2><div className="mt-5 grid gap-4 sm:grid-cols-2">{p.images.slice(1,7).map((image,index)=><div key={image} className="relative aspect-[4/3] overflow-hidden bg-mist"><Image src={image} alt={`${p.title}, foto ${index+2}`} fill className="object-cover" sizes="(max-width:640px) 100vw, 50vw"/></div>)}</div></div>}
-        <div className="mt-10 overflow-hidden bg-mist"><iframe title={`Mappa ${p.city}`} className="h-80 w-full border-0 grayscale" loading="lazy" src={`https://www.google.com/maps?q=${encodeURIComponent((p.address ? p.address+", " : "")+p.city+", Veneto")}&output=embed`}/></div>
+        <div className="mt-10">
+          <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="font-serif text-3xl font-semibold">Posizione</h2>
+              <p className="mt-2 text-sm text-ink/55">{p.address ? `${p.address}, ` : ""}{p.city}</p>
+            </div>
+            <a className="btn-outline gap-2" href={googleMapsLink(p)} target="_blank" rel="noreferrer">
+              <Icon name="pin" className="h-4 w-4"/> Apri su Google Maps
+            </a>
+          </div>
+          <div className="overflow-hidden bg-mist"><iframe title={`Mappa ${p.city}`} className="h-80 w-full border-0 grayscale" loading="lazy" src={googleMapsEmbedUrl(p)}/></div>
+        </div>
       </article>
-      <aside><div className="sticky top-32 border border-ink/10 bg-white p-7 shadow-soft"><h2 className="font-serif text-3xl font-semibold">Vuoi visitarlo?</h2><p className="mb-6 mt-2 text-sm text-ink/55">Lascia i tuoi recapiti. Ti richiamiamo per concordare giorno e orario.</p><LeadForm type="visit" property={`${p.id} - ${p.title}`}/><div className="mt-4 grid grid-cols-2 gap-3"><a className="btn-outline gap-2 px-3" href={`tel:${site.phoneHref}`}><Icon name="phone"/> Chiama</a><a className="btn-dark px-3" target="_blank" rel="noreferrer" href={whatsappUrl(`Buongiorno STARTHOME REAL ESTATE, vorrei informazioni sull'immobile ${p.id}.`)}>WhatsApp</a></div></div></aside>
+      <aside><div className="sticky top-32"><div className="border border-ink/10 bg-white p-7 shadow-soft"><h2 className="font-serif text-3xl font-semibold">Vuoi visitarlo?</h2><p className="mb-6 mt-2 text-sm text-ink/55">Lascia i tuoi recapiti. Ti richiamiamo per concordare giorno e orario.</p><LeadForm type="visit" property={`${p.id} - ${p.title}`}/><div className="mt-4 grid grid-cols-2 gap-3"><a className="btn-outline gap-2 px-3" href={`tel:${site.phoneHref}`}><Icon name="phone"/> Chiama</a><a className="btn-dark px-3" target="_blank" rel="noreferrer" href={whatsappUrl(`Buongiorno STARTHOME REAL ESTATE, vorrei informazioni sull'immobile ${p.id}.`)}>WhatsApp</a></div></div>{p.contract === "vendita" && <MortgageSimulator price={p.price}/>}</div></aside>
     </div></section><CTA/></>;
 }
