@@ -1,8 +1,42 @@
 "use client";
 
 import { FormEvent, ReactNode, useState } from "react";
+import { site, whatsappUrl } from "@/lib/site";
 
 type LeadType = "contact" | "valuation" | "visit" | "buyer" | "alert" | "career";
+
+const successCopy: Record<LeadType, { title: string; message: string; whatsapp: string }> = {
+  contact: {
+    title: "Richiesta ricevuta.",
+    message: "Un consulente STARTHOME ti ricontatterà al più presto.",
+    whatsapp: "Buongiorno STARTHOME REAL ESTATE, ho appena inviato una richiesta dal sito e vorrei parlarne con un consulente.",
+  },
+  valuation: {
+    title: "Valutazione richiesta.",
+    message: "Abbiamo ricevuto i dati dell'immobile. Ti contatteremo per preparare una valutazione chiara e realistica.",
+    whatsapp: "Buongiorno STARTHOME REAL ESTATE, ho richiesto una valutazione gratuita dal sito.",
+  },
+  visit: {
+    title: "Visita richiesta.",
+    message: "Ti richiamiamo per concordare giorno e orario della visita.",
+    whatsapp: "Buongiorno STARTHOME REAL ESTATE, ho richiesto una visita dal sito.",
+  },
+  buyer: {
+    title: "Ricerca ricevuta.",
+    message: "Abbiamo registrato le tue preferenze e ti proporremo immobili coerenti con la tua richiesta.",
+    whatsapp: "Buongiorno STARTHOME REAL ESTATE, ho compilato Trova la casa giusta per te.",
+  },
+  alert: {
+    title: "Alert attivato.",
+    message: "Ti avviseremo quando arrivano immobili simili e coerenti con la tua ricerca.",
+    whatsapp: "Buongiorno STARTHOME REAL ESTATE, ho attivato un alert immobili dal sito.",
+  },
+  career: {
+    title: "Candidatura ricevuta.",
+    message: "Valuteremo il tuo profilo e ti ricontatteremo se in linea con il percorso STARTHOME.",
+    whatsapp: "Buongiorno STARTHOME REAL ESTATE, ho inviato una candidatura dalla pagina Lavora con noi.",
+  },
+};
 
 function FormShell({ type, property, context, children, buttonLabel }: { type: LeadType; property?: string; context?: string; children: ReactNode; buttonLabel: string }) {
   const [sent, setSent] = useState(false);
@@ -35,7 +69,17 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
     }
   }
 
-  if (sent) return <div className="rounded-sm bg-green-50 p-6 text-green-900"><strong>Richiesta ricevuta.</strong><p className="mt-2 text-sm">Un consulente STARTHOME ti ricontatterà al più presto.</p></div>;
+  if (sent) {
+    const copy = successCopy[type];
+    return <div className="rounded-sm bg-green-50 p-6 text-green-950">
+      <strong>{copy.title}</strong>
+      <p className="mt-2 text-sm leading-6">{copy.message} Ti abbiamo inviato anche una conferma automatica via email.</p>
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <a className="btn-outline justify-center bg-white" href={`tel:${site.phoneHref}`}>Chiama {site.phoneDisplay}</a>
+        <a className="btn-primary justify-center bg-[#25D366] text-white hover:bg-[#1fb85a]" href={whatsappUrl(copy.whatsapp)} target="_blank" rel="noreferrer">Scrivi su WhatsApp</a>
+      </div>
+    </div>;
+  }
   return <form onSubmit={submit} className="grid gap-4">
     {property && <input type="hidden" name="immobile" value={property}/>}
     <input name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true"/>

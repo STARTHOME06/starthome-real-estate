@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { site, whatsappUrl } from "@/lib/site";
 
 const labels: Record<string, string> = {
   contact: "Richiesta informazioni",
@@ -7,6 +8,63 @@ const labels: Record<string, string> = {
   buyer: "Richiesta ricerca casa",
   alert: "Richiesta alert nuovi immobili",
   career: "Candidatura lavora con noi",
+};
+
+const nextStepCopy: Record<string, { title: string; intro: string; steps: string[] }> = {
+  valuation: {
+    title: "Abbiamo ricevuto la tua richiesta di valutazione",
+    intro: "Grazie per aver scelto STARTHOME REAL ESTATE. Ora analizziamo le informazioni che ci hai inviato e ti ricontattiamo per costruire una valutazione seria, realistica e utile per decidere il prossimo passo.",
+    steps: [
+      "Verifichiamo zona, caratteristiche e posizionamento dell'immobile.",
+      "Ti contattiamo per eventuali dettagli mancanti o per fissare un sopralluogo.",
+      "Prepariamo un'indicazione di valore chiara, con una strategia commerciale coerente.",
+    ],
+  },
+  buyer: {
+    title: "Abbiamo ricevuto la tua ricerca casa",
+    intro: "Grazie per averci raccontato cosa stai cercando. Useremo queste informazioni per proporti immobili più coerenti con budget, zona e stile di vita, anche quando arrivano nuove opportunità.",
+    steps: [
+      "Analizziamo zone, budget, tipologia e priorità.",
+      "Confrontiamo la richiesta con gli immobili disponibili e quelli in arrivo.",
+      "Ti ricontattiamo con proposte selezionate, senza farti perdere tempo.",
+    ],
+  },
+  visit: {
+    title: "Abbiamo ricevuto la tua richiesta di visita",
+    intro: "Grazie, abbiamo preso in carico la richiesta. Un consulente STARTHOME ti contatterà per concordare giorno e orario e darti tutte le informazioni utili sull'immobile.",
+    steps: [
+      "Verifichiamo disponibilità dell'immobile e agenda visite.",
+      "Ti richiamiamo per fissare l'appuntamento.",
+      "Ti accompagniamo con informazioni chiare su spazi, zona e passaggi successivi.",
+    ],
+  },
+  alert: {
+    title: "Il tuo alert immobili è attivo",
+    intro: "Grazie, abbiamo registrato la tua richiesta. Ti avviseremo quando arriveranno soluzioni simili e coerenti con le caratteristiche che ci hai indicato.",
+    steps: [
+      "Salviamo le preferenze principali della tua ricerca.",
+      "Monitoriamo le nuove disponibilità nelle zone di interesse.",
+      "Ti contattiamo quando troviamo una soluzione davvero pertinente.",
+    ],
+  },
+  career: {
+    title: "Abbiamo ricevuto la tua candidatura",
+    intro: "Grazie per l'interesse verso STARTHOME REAL ESTATE. Valuteremo il tuo profilo con attenzione e ti ricontatteremo se in linea con il percorso di crescita dell'agenzia.",
+    steps: [
+      "Leggiamo esperienza, disponibilità e zona di interesse.",
+      "Valutiamo il profilo rispetto alle figure che stiamo inserendo.",
+      "Ti contattiamo per un primo confronto conoscitivo se c'è coerenza.",
+    ],
+  },
+  contact: {
+    title: "Abbiamo ricevuto la tua richiesta",
+    intro: "Grazie per aver contattato STARTHOME REAL ESTATE. Ti risponderemo con indicazioni chiare e concrete, in base all'obiettivo che ci hai raccontato.",
+    steps: [
+      "Leggiamo la tua richiesta.",
+      "Individuiamo il consulente più adatto.",
+      "Ti ricontattiamo via telefono o email il prima possibile.",
+    ],
+  },
 };
 
 function clean(value: unknown, maxLength = 2000) {
@@ -20,6 +78,56 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function buildCustomerEmail(type: string, nome: string) {
+  const copy = nextStepCopy[type] || nextStepCopy.contact;
+  const safeName = escapeHtml(nome);
+  const steps = copy.steps.map((step) => `<li style="margin:0 0 10px">${escapeHtml(step)}</li>`).join("");
+  const waLink = whatsappUrl("Buongiorno STARTHOME REAL ESTATE, ho appena inviato una richiesta dal sito e vorrei parlarne con un consulente.");
+
+  return {
+    subject: `${copy.title} - STARTHOME REAL ESTATE`,
+    html: `
+      <div style="margin:0;background:#f5f2ec;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;color:#171725">
+        <div style="margin:0 auto;max-width:680px;background:#ffffff;border:1px solid #e7ddc6">
+          <div style="background:#121522;padding:28px 32px;color:#ffffff">
+            <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#c9a24f;font-weight:700">STARTHOME REAL ESTATE</div>
+            <h1 style="margin:14px 0 0;font-size:28px;line-height:1.2;font-family:Georgia,serif">${escapeHtml(copy.title)}</h1>
+          </div>
+          <div style="padding:32px">
+            <p style="margin:0 0 16px;font-size:16px;line-height:1.7">Buongiorno ${safeName},</p>
+            <p style="margin:0 0 24px;font-size:16px;line-height:1.7">${escapeHtml(copy.intro)}</p>
+            <h2 style="margin:0 0 14px;font-size:18px">Cosa succede ora</h2>
+            <ol style="margin:0 0 28px;padding-left:22px;font-size:15px;line-height:1.6">${steps}</ol>
+            <div style="background:#f5f2ec;border-left:4px solid #c9a24f;padding:18px 20px;margin:0 0 28px">
+              <strong>Vuoi fare prima?</strong><br>
+              Puoi chiamarci al <a style="color:#121522;font-weight:700" href="tel:${site.phoneHref}">${site.phoneDisplay}</a> oppure scriverci direttamente su WhatsApp.
+            </div>
+            <p style="margin:0 0 26px">
+              <a href="${waLink}" style="display:inline-block;background:#25D366;color:#ffffff;text-decoration:none;font-weight:700;padding:14px 20px;border-radius:2px">Scrivi su WhatsApp</a>
+            </p>
+            <p style="margin:0;font-size:14px;line-height:1.7;color:#666">
+              ${site.name}<br>
+              ${site.postalAddress}<br>
+              ${site.phoneDisplay} · ${site.email}
+            </p>
+          </div>
+        </div>
+      </div>
+    `,
+  };
+}
+
+async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
+  return fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 }
 
 export async function POST(request: Request) {
@@ -101,24 +209,32 @@ export async function POST(request: Request) {
       .map(([label, value]) => `<tr><td style="padding:8px;border-bottom:1px solid #ddd"><strong>${escapeHtml(label)}</strong></td><td style="padding:8px;border-bottom:1px solid #ddd">${escapeHtml(value).replaceAll("\n", "<br>")}</td></tr>`)
       .join("");
 
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: email,
-        subject,
-        html: `<h2>Nuovo contatto dal sito STARTHOME</h2><table style="border-collapse:collapse;width:100%;max-width:700px">${rows}</table>`,
-      }),
+    const response = await sendEmail(apiKey, {
+      from,
+      to: [to],
+      reply_to: email,
+      subject,
+      html: `<h2>Nuovo contatto dal sito STARTHOME</h2><table style="border-collapse:collapse;width:100%;max-width:700px">${rows}</table>`,
     });
 
     if (!response.ok) {
       console.error("Errore Resend", response.status, await response.text());
       return NextResponse.json({ error: "Invio email non riuscito" }, { status: 502 });
+    }
+
+    const customerEmail = buildCustomerEmail(type, nome);
+    const customerResponse = await sendEmail(apiKey, {
+      from,
+      to: [email],
+      reply_to: to,
+      subject: customerEmail.subject,
+      html: customerEmail.html,
+    });
+
+    // La richiesta all'agenzia resta valida anche se l'autorisposta non parte
+    // per limiti del dominio email o configurazioni Resend.
+    if (!customerResponse.ok) {
+      console.error("Errore autorisposta Resend", customerResponse.status, await customerResponse.text());
     }
 
     return NextResponse.json({ ok: true });
