@@ -2,7 +2,7 @@
 
 import { FormEvent, ReactNode, useState } from "react";
 
-type LeadType = "contact" | "valuation" | "visit" | "buyer" | "alert";
+type LeadType = "contact" | "valuation" | "visit" | "buyer" | "alert" | "career";
 
 function FormShell({ type, property, context, children, buttonLabel }: { type: LeadType; property?: string; context?: string; children: ReactNode; buttonLabel: string }) {
   const [sent, setSent] = useState(false);
@@ -71,5 +71,16 @@ export function PropertyAlertForm({ property }: { property: string }) {
     <div className="grid gap-4 sm:grid-cols-2"><div><label className="label" htmlFor="alert-name">Nome e cognome</label><input id="alert-name" name="nome" className="field" required placeholder="Mario Rossi"/></div><div><label className="label" htmlFor="alert-phone">Telefono</label><input id="alert-phone" name="telefono" className="field" required type="tel" placeholder="+39"/></div></div>
     <div><label className="label" htmlFor="alert-email">Email</label><input id="alert-email" name="email" className="field" required type="email" placeholder="nome@email.it"/></div>
     <div><label className="label" htmlFor="alert-message">Cosa cerchi di simile?</label><textarea id="alert-message" name="messaggio" rows={3} className="field h-auto py-3" placeholder="Zona, budget, camere, garage, tempi..."/></div>
+  </FormShell>;
+}
+
+export function CareerForm() {
+  return <FormShell type="career" context="Lavora con noi" buttonLabel="Invia la candidatura">
+    <div className="grid gap-4 sm:grid-cols-2"><div><label className="label" htmlFor="career-name">Nome e cognome</label><input id="career-name" name="nome" className="field" required placeholder="Mario Rossi"/></div><div><label className="label" htmlFor="career-phone">Telefono</label><input id="career-phone" name="telefono" className="field" required type="tel" placeholder="+39"/></div></div>
+    <div><label className="label" htmlFor="career-email">Email</label><input id="career-email" name="email" className="field" required type="email" placeholder="nome@email.it"/></div>
+    <div className="grid gap-4 sm:grid-cols-2"><div><label className="label" htmlFor="career-role">Figura di interesse</label><select id="career-role" name="ruolo" className="field"><option>Agente immobiliare</option><option>Acquisitore / consulente vendite</option><option>Coordinatrice / segreteria commerciale</option><option>Collaboratore junior</option><option>Altro profilo</option></select></div><div><label className="label" htmlFor="career-experience">Esperienza</label><select id="career-experience" name="esperienza" className="field"><option>Prima esperienza</option><option>1-2 anni</option><option>3-5 anni</option><option>Oltre 5 anni</option></select></div></div>
+    <div className="grid gap-4 sm:grid-cols-3"><div><label className="label" htmlFor="career-area">Zona/provincia</label><input id="career-area" name="provincia" className="field" placeholder="Es. Padova, Venezia"/></div><div><label className="label" htmlFor="career-vat">Partita IVA</label><select id="career-vat" name="partitaIva" className="field"><option>Da aprire</option><option>Già attiva</option><option>Non so</option></select></div><div><label className="label" htmlFor="career-availability">Disponibilità</label><select id="career-availability" name="disponibilita" className="field"><option>Immediata</option><option>Entro 30 giorni</option><option>Da valutare</option></select></div></div>
+    <div><label className="label" htmlFor="career-linkedin">LinkedIn / portfolio / profilo online</label><input id="career-linkedin" name="linkedin" className="field" placeholder="Link facoltativo"/></div>
+    <div><label className="label" htmlFor="career-message">Raccontaci chi sei</label><textarea id="career-message" name="messaggio" rows={4} className="field h-auto py-3" placeholder="Esperienze, obiettivi, zona in cui vuoi lavorare, perché STARTHOME..."/></div>
   </FormShell>;
 }

@@ -6,6 +6,7 @@ const labels: Record<string, string> = {
   visit: "Richiesta visita immobile",
   buyer: "Richiesta ricerca casa",
   alert: "Richiesta alert nuovi immobili",
+  career: "Candidatura lavora con noi",
 };
 
 function clean(value: unknown, maxLength = 2000) {
@@ -46,6 +47,12 @@ export async function POST(request: Request) {
     const garage = clean(body.garage, 80);
     const giardino = clean(body.giardino, 80);
     const tempi = clean(body.tempi, 120);
+    const ruolo = clean(body.ruolo, 120);
+    const esperienza = clean(body.esperienza, 120);
+    const provincia = clean(body.provincia, 120);
+    const partitaIva = clean(body.partitaIva, 80);
+    const disponibilita = clean(body.disponibilita, 120);
+    const linkedin = clean(body.linkedin, 240);
     const messaggio = clean(body.messaggio);
 
     if (!nome || !telefono || !email || !email.includes("@")) {
@@ -81,6 +88,12 @@ export async function POST(request: Request) {
       ["Garage", garage],
       ["Giardino", giardino],
       ["Tempi", tempi],
+      ["Ruolo", ruolo],
+      ["Esperienza", esperienza],
+      ["Provincia/Zona", provincia],
+      ["Partita IVA", partitaIva],
+      ["Disponibilità", disponibilita],
+      ["LinkedIn / portfolio", linkedin],
       ["Messaggio", messaggio],
     ].filter(([, value]) => value);
 

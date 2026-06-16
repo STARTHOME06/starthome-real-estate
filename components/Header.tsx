@@ -9,7 +9,7 @@ import { Icon } from "./Icons";
 const nav = [
   ["Vendita", "/immobili-in-vendita"], ["Affitto", "/immobili-in-affitto"],
   ["Vendi casa", "/vendere-casa"], ["Valuta casa", "/valutazione"], ["Servizi", "/servizi"],
-  ["Chi siamo", "/chi-siamo"], ["Guide", "/blog"], ["Contatti", "/contatti"],
+  ["Chi siamo", "/chi-siamo"], ["Lavora con noi", "/lavora-con-noi"], ["Guide", "/blog"], ["Contatti", "/contatti"],
 ];
 
 export function Header() {
