@@ -233,11 +233,13 @@ export async function POST(request: Request) {
 
     // La richiesta all'agenzia resta valida anche se l'autorisposta non parte
     // per limiti del dominio email o configurazioni Resend.
-    if (!customerResponse.ok) {
+    const autoReplySent = customerResponse.ok;
+
+    if (!autoReplySent) {
       console.error("Errore autorisposta Resend", customerResponse.status, await customerResponse.text());
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, autoReplySent });
   } catch (error) {
     console.error("Errore modulo contatti", error);
     return NextResponse.json({ error: "Richiesta non valida" }, { status: 400 });
