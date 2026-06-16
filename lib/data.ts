@@ -17,7 +17,12 @@ export type Property = {
   price: number;
   sqm: number;
   rooms: number;
+  bedrooms?: number;
   bathrooms: number;
+  garages?: number;
+  kitchen?: boolean;
+  livingRoom?: boolean;
+  livingKitchen?: boolean;
   floor: string;
   energy: string;
   image: string;

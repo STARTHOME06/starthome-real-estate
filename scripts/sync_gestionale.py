@@ -134,6 +134,10 @@ def floor_label(values: dict[int, int]) -> str:
     return "Non indicato"
 
 
+def normalized_count(value: int) -> int:
+    return 4 if value == -1 else max(value, 0)
+
+
 def image_extension(url: str) -> str:
     suffix = Path(urllib.parse.urlsplit(url).path).suffix.lower()
     return suffix if suffix in {".jpg", ".jpeg", ".png", ".webp", ".gif"} else ".jpg"
@@ -210,6 +214,8 @@ def parse_feed(xml_path: Path, allow_image_download: bool, max_photos: int = 12)
             rooms = micro[1]
         if not rooms:
             rooms = max(values.get(2, 0) + 1, 1)
+        bedrooms = normalized_count(values.get(2, 0))
+        garages = normalized_count(values.get(5, 0)) + (2 if values.get(19) == 1 else 0)
 
         photos, floorplans = sync_images(announcement, property_id, allow_image_download, max_photos)
         fallback = "/images/appartamento-vigonza.webp"
@@ -238,7 +244,12 @@ def parse_feed(xml_path: Path, allow_image_download: bool, max_photos: int = 12)
             "price": number(text(info, "price")),
             "sqm": number(text(info, "mq")),
             "rooms": rooms,
+            "bedrooms": bedrooms,
             "bathrooms": max(values.get(1, 0), 0),
+            "garages": garages,
+            "kitchen": values.get(3) == 1,
+            "livingRoom": values.get(4) == 1,
+            "livingKitchen": values.get(22) == 1,
             "floor": floor_label(values),
             "energy": energy,
             "image": photos[0] if photos else fallback,
