@@ -139,7 +139,12 @@ def image_extension(url: str) -> str:
     return suffix if suffix in {".jpg", ".jpeg", ".png", ".webp", ".gif"} else ".jpg"
 
 
-def sync_images(announcement: ET.Element, property_id: str, allow_download: bool) -> tuple[list[str], list[str]]:
+def sync_images(
+    announcement: ET.Element,
+    property_id: str,
+    allow_download: bool,
+    max_photos: int,
+) -> tuple[list[str], list[str]]:
     photos: list[str] = []
     floorplans: list[str] = []
     if not allow_download:
@@ -164,11 +169,14 @@ def sync_images(announcement: ET.Element, property_id: str, allow_download: bool
             continue
         public_path = f"/images/gestionale/{filename}"
         is_floorplan = attachment.get("planimetria", "0") == "1"
-        (floorplans if is_floorplan else photos).append(public_path)
+        if is_floorplan:
+            floorplans.append(public_path)
+        elif len(photos) < max_photos:
+            photos.append(public_path)
     return photos, floorplans
 
 
-def parse_feed(xml_path: Path, allow_image_download: bool) -> list[dict]:
+def parse_feed(xml_path: Path, allow_image_download: bool, max_photos: int = 12) -> list[dict]:
     root = ET.parse(xml_path).getroot()
     announcements = [root] if root.tag == "annuncio" else root.findall(".//annuncio")
     properties: list[dict] = []
@@ -203,7 +211,7 @@ def parse_feed(xml_path: Path, allow_image_download: bool) -> list[dict]:
         if not rooms:
             rooms = max(values.get(2, 0) + 1, 1)
 
-        photos, floorplans = sync_images(announcement, property_id, allow_image_download)
+        photos, floorplans = sync_images(announcement, property_id, allow_image_download, max_photos)
         fallback = "/images/appartamento-vigonza.webp"
         if category_id in {1, 2, 3, 4, 13, 15, 18}:
             fallback = "/images/casale-dolo.webp"
@@ -270,7 +278,8 @@ def main() -> None:
         feed_url = os.environ.get("GI_FEED_URL", "").strip()
         if not feed_url:
             raise SystemExit("Variabile GI_FEED_URL mancante")
-        download_images = os.environ.get("GI_DOWNLOAD_IMAGES", "").strip() == "1"
+        download_images = os.environ.get("GI_DOWNLOAD_IMAGES", "1").strip() != "0"
+        max_photos = max(number(os.environ.get("GI_MAX_IMAGES_PER_PROPERTY", "12")), 1)
         with tempfile.TemporaryDirectory(prefix="gi-feed-") as temp_name:
             temp = Path(temp_name)
             archive_path = temp / "feed.tar.gz"
@@ -286,10 +295,10 @@ def main() -> None:
             if not xml_files:
                 raise SystemExit("Nessun XML trovato nel feed")
             if download_images:
-                log("Download immagini abilitato")
+                log(f"Download immagini abilitato, massimo {max_photos} foto per immobile")
             else:
                 log("Download immagini disattivato: uso immagini provvisorie del sito")
-            properties = parse_feed(xml_files[0], download_images)
+            properties = parse_feed(xml_files[0], download_images, max_photos)
 
     if not properties:
         raise SystemExit("Il feed non contiene annunci pubblicabili: dati esistenti non modificati")
