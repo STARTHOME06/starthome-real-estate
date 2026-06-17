@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, ReactNode, useState } from "react";
+import Link from "next/link";
 import { site, whatsappUrl } from "@/lib/site";
 
 type LeadType = "contact" | "valuation" | "visit" | "buyer" | "alert" | "career";
@@ -91,7 +92,8 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
     {children}
     <div className="space-y-3 rounded-sm bg-mist p-4">
       <p className="text-xs font-bold uppercase tracking-[.18em] text-navy">Trattamento dati personali</p>
-      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Ho letto e accetto l'informativa sulla privacy, i termini e le condizioni.</label>
+      <p className="text-xs leading-5 text-ink/55">I dati inseriti saranno utilizzati da STARTHOME REAL ESTATE per ricontattarti, gestire la tua richiesta immobiliare e, solo se dai consenso, inviarti comunicazioni informative o promozionali. Puoi revocare il consenso in qualsiasi momento.</p>
+      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Ho letto e accetto l'<Link href="/privacy" className="font-semibold text-navy underline underline-offset-2">informativa sulla privacy</Link>, i termini e le condizioni.</label>
       <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="newsletterConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Desidero iscrivermi alla newsletter STARTHOME.</label>
     </div>
     <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="whatsappConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Preferisco essere ricontattato anche tramite WhatsApp.</label>
