@@ -204,7 +204,7 @@ export async function POST(request: Request) {
       ["Partita IVA", partitaIva],
       ["Disponibilità", disponibilita],
       ["LinkedIn / portfolio", linkedin],
-      ["Consenso WhatsApp", whatsappConsent ? "Sì" : "No"],
+      ["Preferenza contatto WhatsApp", whatsappConsent ? "Sì" : "No"],
       ["Messaggio", messaggio],
     ].filter(([, value]) => value);
 
