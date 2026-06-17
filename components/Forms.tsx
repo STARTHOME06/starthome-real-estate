@@ -90,12 +90,23 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
     {property && <input type="hidden" name="immobile" value={property}/>}
     <input name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true"/>
     {children}
-    <div className="space-y-3 rounded-sm bg-mist p-4">
+    <div className="space-y-4 rounded-sm bg-mist p-5 sm:p-6">
       <p className="text-xs font-bold uppercase tracking-[.18em] text-navy">Trattamento dati personali</p>
       <p className="text-xs leading-5 text-ink/55">I dati inseriti saranno utilizzati da STARTHOME REAL ESTATE per ricontattarti, gestire la tua richiesta immobiliare e, solo se dai consenso, inviarti comunicazioni informative o promozionali. Puoi revocare il consenso in qualsiasi momento.</p>
-      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Ho letto e accetto l'<Link href="/privacy" className="font-semibold text-navy underline underline-offset-2">informativa sulla privacy</Link>, i termini e le condizioni.</label>
-      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="newsletterConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Desidero iscrivermi alla newsletter STARTHOME.</label>
-      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="whatsappConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Preferisco essere ricontattato anche tramite WhatsApp.</label>
+      <div className="space-y-3">
+        <label className="grid grid-cols-[18px_1fr] gap-3 text-xs leading-5 text-ink/65">
+          <input required type="checkbox" className="mt-0.5 h-4 w-4 accent-gold"/>
+          <span>Ho letto e accetto l'<Link href="/privacy" className="font-semibold text-navy underline underline-offset-2">informativa sulla privacy</Link>, i termini e le condizioni.</span>
+        </label>
+        <label className="grid grid-cols-[18px_1fr] gap-3 text-xs leading-5 text-ink/65">
+          <input name="newsletterConsent" value="si" type="checkbox" className="mt-0.5 h-4 w-4 accent-gold"/>
+          <span>Desidero iscrivermi alla newsletter STARTHOME.</span>
+        </label>
+        <label className="grid grid-cols-[18px_1fr] gap-3 text-xs leading-5 text-ink/65">
+          <input name="whatsappConsent" value="si" type="checkbox" className="mt-0.5 h-4 w-4 accent-gold"/>
+          <span>Preferisco essere ricontattato anche tramite WhatsApp.</span>
+        </label>
+      </div>
     </div>
     {error && <p role="alert" className="rounded-sm bg-red-50 p-4 text-sm text-red-800">{error}</p>}
     <button className="btn-primary w-full disabled:cursor-wait disabled:opacity-60" type="submit" disabled={sending}>{sending ? "Invio in corso..." : buttonLabel}</button>
