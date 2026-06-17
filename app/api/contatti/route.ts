@@ -163,6 +163,7 @@ export async function POST(request: Request) {
     const disponibilita = clean(body.disponibilita, 120);
     const linkedin = clean(body.linkedin, 240);
     const whatsappConsent = clean(body.whatsappConsent, 20) === "si";
+    const newsletterConsent = clean(body.newsletterConsent, 20) === "si";
     const messaggio = clean(body.messaggio);
 
     if (!nome || !telefono || !email || !email.includes("@")) {
@@ -205,6 +206,7 @@ export async function POST(request: Request) {
       ["Disponibilità", disponibilita],
       ["LinkedIn / portfolio", linkedin],
       ["Preferenza contatto WhatsApp", whatsappConsent ? "Sì" : "No"],
+      ["Iscrizione newsletter", newsletterConsent ? "Sì" : "No"],
       ["Messaggio", messaggio],
     ].filter(([, value]) => value);
 

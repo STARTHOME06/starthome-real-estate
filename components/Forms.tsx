@@ -89,7 +89,11 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
     {property && <input type="hidden" name="immobile" value={property}/>}
     <input name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true"/>
     {children}
-    <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Acconsento al trattamento dei dati personali secondo la Privacy Policy.</label>
+    <div className="space-y-3 rounded-sm bg-mist p-4">
+      <p className="text-xs font-bold uppercase tracking-[.18em] text-navy">Trattamento dati personali</p>
+      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Ho letto e accetto l'informativa sulla privacy, i termini e le condizioni.</label>
+      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="newsletterConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Desidero iscrivermi alla newsletter STARTHOME.</label>
+    </div>
     <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="whatsappConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Preferisco essere ricontattato anche tramite WhatsApp.</label>
     {error && <p role="alert" className="rounded-sm bg-red-50 p-4 text-sm text-red-800">{error}</p>}
     <button className="btn-primary w-full disabled:cursor-wait disabled:opacity-60" type="submit" disabled={sending}>{sending ? "Invio in corso..." : buttonLabel}</button>
