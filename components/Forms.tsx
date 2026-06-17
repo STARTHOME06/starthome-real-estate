@@ -95,8 +95,8 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
       <p className="text-xs leading-5 text-ink/55">I dati inseriti saranno utilizzati da STARTHOME REAL ESTATE per ricontattarti, gestire la tua richiesta immobiliare e, solo se dai consenso, inviarti comunicazioni informative o promozionali. Puoi revocare il consenso in qualsiasi momento.</p>
       <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Ho letto e accetto l'<Link href="/privacy" className="font-semibold text-navy underline underline-offset-2">informativa sulla privacy</Link>, i termini e le condizioni.</label>
       <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="newsletterConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Desidero iscrivermi alla newsletter STARTHOME.</label>
+      <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="whatsappConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Preferisco essere ricontattato anche tramite WhatsApp.</label>
     </div>
-    <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="whatsappConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Preferisco essere ricontattato anche tramite WhatsApp.</label>
     {error && <p role="alert" className="rounded-sm bg-red-50 p-4 text-sm text-red-800">{error}</p>}
     <button className="btn-primary w-full disabled:cursor-wait disabled:opacity-60" type="submit" disabled={sending}>{sending ? "Invio in corso..." : buttonLabel}</button>
   </form>;
