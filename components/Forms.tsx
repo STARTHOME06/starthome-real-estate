@@ -4,6 +4,7 @@ import { FormEvent, ReactNode, useState } from "react";
 import { site, whatsappUrl } from "@/lib/site";
 
 type LeadType = "contact" | "valuation" | "visit" | "buyer" | "alert" | "career";
+type SubmitResult = { whatsappConfigured?: boolean; whatsappAutoReplySent?: boolean };
 
 const successCopy: Record<LeadType, { title: string; message: string; whatsapp: string }> = {
   contact: {
@@ -40,6 +41,7 @@ const successCopy: Record<LeadType, { title: string; message: string; whatsapp: 
 
 function FormShell({ type, property, context, children, buttonLabel }: { type: LeadType; property?: string; context?: string; children: ReactNode; buttonLabel: string }) {
   const [sent, setSent] = useState(false);
+  const [submitResult, setSubmitResult] = useState<SubmitResult>({});
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
@@ -60,7 +62,9 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
         }),
       });
 
+      const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error("Invio non riuscito");
+      setSubmitResult(result);
       setSent(true);
     } catch {
       setError("Non è stato possibile inviare la richiesta. Riprova oppure contattaci tramite telefono o WhatsApp.");
@@ -74,6 +78,8 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
     return <div className="rounded-sm bg-green-50 p-6 text-green-950">
       <strong>{copy.title}</strong>
       <p className="mt-2 text-sm leading-6">{copy.message} Ti abbiamo inviato anche una conferma automatica via email.</p>
+      {submitResult.whatsappAutoReplySent && <p className="mt-3 rounded-sm bg-white/70 p-3 text-xs leading-5">Ti abbiamo inviato anche una conferma automatica su WhatsApp.</p>}
+      {submitResult.whatsappConfigured === false && <p className="mt-3 rounded-sm bg-white/70 p-3 text-xs leading-5">WhatsApp automatico non è ancora attivo: puoi comunque scriverci subito dal pulsante qui sotto.</p>}
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
         <a className="btn-outline justify-center bg-white" href={`tel:${site.phoneHref}`}>Chiama {site.phoneDisplay}</a>
         <a className="btn-primary justify-center bg-[#25D366] text-white hover:bg-[#1fb85a]" href={whatsappUrl(copy.whatsapp)} target="_blank" rel="noreferrer">Scrivi su WhatsApp</a>
@@ -85,6 +91,7 @@ function FormShell({ type, property, context, children, buttonLabel }: { type: L
     <input name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true"/>
     {children}
     <label className="flex gap-3 text-xs leading-5 text-ink/60"><input required type="checkbox" className="mt-1 accent-gold"/> Acconsento al trattamento dei dati personali secondo la Privacy Policy.</label>
+    <label className="flex gap-3 text-xs leading-5 text-ink/60"><input name="whatsappConsent" value="si" type="checkbox" className="mt-1 accent-gold"/> Desidero ricevere conferma e aggiornamenti anche tramite WhatsApp.</label>
     {error && <p role="alert" className="rounded-sm bg-red-50 p-4 text-sm text-red-800">{error}</p>}
     <button className="btn-primary w-full disabled:cursor-wait disabled:opacity-60" type="submit" disabled={sending}>{sending ? "Invio in corso..." : buttonLabel}</button>
   </form>;

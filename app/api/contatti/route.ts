@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { site, whatsappUrl } from "@/lib/site";
+import { isWhatsAppConfigured, sendWhatsAppAutoReply } from "@/lib/whatsapp";
 
 const labels: Record<string, string> = {
   contact: "Richiesta informazioni",
@@ -161,6 +162,7 @@ export async function POST(request: Request) {
     const partitaIva = clean(body.partitaIva, 80);
     const disponibilita = clean(body.disponibilita, 120);
     const linkedin = clean(body.linkedin, 240);
+    const whatsappConsent = clean(body.whatsappConsent, 20) === "si";
     const messaggio = clean(body.messaggio);
 
     if (!nome || !telefono || !email || !email.includes("@")) {
@@ -202,6 +204,7 @@ export async function POST(request: Request) {
       ["Partita IVA", partitaIva],
       ["Disponibilità", disponibilita],
       ["LinkedIn / portfolio", linkedin],
+      ["Consenso WhatsApp", whatsappConsent ? "Sì" : "No"],
       ["Messaggio", messaggio],
     ].filter(([, value]) => value);
 
@@ -239,7 +242,16 @@ export async function POST(request: Request) {
       console.error("Errore autorisposta Resend", customerResponse.status, await customerResponse.text());
     }
 
-    return NextResponse.json({ ok: true, autoReplySent });
+    const whatsappResult = whatsappConsent
+      ? await sendWhatsAppAutoReply({ typeLabel: labels[type] || labels.contact, name: nome, phone: telefono })
+      : { configured: isWhatsAppConfigured(), sent: false };
+
+    return NextResponse.json({
+      ok: true,
+      autoReplySent,
+      whatsappConfigured: whatsappResult.configured,
+      whatsappAutoReplySent: whatsappResult.sent,
+    });
   } catch (error) {
     console.error("Errore modulo contatti", error);
     return NextResponse.json({ error: "Richiesta non valida" }, { status: 400 });
