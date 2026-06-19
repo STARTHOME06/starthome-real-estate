@@ -1,20 +1,45 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CTA } from "@/components/CTA";
 import { LeadForm, PropertyAlertForm } from "@/components/Forms";
 import { Icon } from "@/components/Icons";
 import { MortgageSimulator } from "@/components/MortgageSimulator";
 import { PropertyFeatureBadges } from "@/components/PropertyFeatures";
+import { SocialShare } from "@/components/SocialShare";
 import { formatPrice, properties } from "@/lib/data";
 import { googleMapsEmbedUrl, googleMapsLink } from "@/lib/maps";
 import { nearbyServices } from "@/lib/market";
 import { site, whatsappUrl } from "@/lib/site";
 
 export function generateStaticParams() { return properties.map(p => ({ slug: p.slug })); }
-export async function generateMetadata({ params }: { params: Promise<{slug:string}> }) {
+export async function generateMetadata({ params }: { params: Promise<{slug:string}> }): Promise<Metadata> {
   const { slug } = await params; const p = properties.find(x => x.slug === slug);
-  return p ? { title: `${p.title} a ${p.city}`, description: `${p.type} di ${p.sqm} m² ${p.contract === "vendita" ? "in vendita" : "in affitto"} a ${p.city}. ${p.rooms} locali, classe ${p.energy}.` } : {};
+  if (!p) return {};
+  const title = `${p.title} a ${p.city}`;
+  const description = `${p.type} di ${p.sqm} m² ${p.contract === "vendita" ? "in vendita" : "in affitto"} a ${p.city}. ${p.rooms} locali, classe ${p.energy}.`;
+  const canonical = `https://www.starthome.it/immobili/${p.slug}`;
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title: `${title} | STARTHOME REAL ESTATE`,
+      description: `${formatPrice(p)} · ${description}`,
+      url: canonical,
+      siteName: site.name,
+      locale: "it_IT",
+      type: "website",
+      images: [{ url: p.image, alt: p.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | STARTHOME REAL ESTATE`,
+      description: `${formatPrice(p)} · ${description}`,
+      images: [p.image],
+    },
+  };
 }
 export default async function Page({ params }: { params: Promise<{slug:string}> }) {
   const { slug } = await params; const p = properties.find(x => x.slug === slug); if (!p) notFound();
@@ -23,6 +48,7 @@ export default async function Page({ params }: { params: Promise<{slug:string}> 
     <div className="container-site grid gap-12 pt-12 lg:grid-cols-[1fr_380px]">
       <article><p className="eyebrow">{p.id} · {p.city}, {p.zone}</p><div className="flex flex-col justify-between gap-4 md:flex-row md:items-end"><h1 className="font-serif text-4xl font-semibold sm:text-5xl">{p.title}</h1><p className="shrink-0 text-2xl font-bold">{formatPrice(p)}</p></div>
         <div className="my-9"><PropertyFeatureBadges property={p}/></div>
+        <SocialShare url={`https://www.starthome.it/immobili/${p.slug}`} title={`${p.title} a ${p.city} · ${formatPrice(p)}`}/>
         <h2 className="font-serif text-3xl font-semibold">Descrizione</h2><p className="mt-5 max-w-3xl leading-8 text-ink/65">{p.description}</p>
         <div className="mt-10 grid gap-4 border-y border-ink/10 py-8 sm:grid-cols-2"><p><strong>Piano:</strong> {p.floor}</p><p><strong>Tipologia:</strong> {p.type}</p><p><strong>Zona:</strong> {p.zone}</p><p><strong>Classe energetica:</strong> {p.energy}</p><p><strong>Riferimento:</strong> {p.id}</p></div>
         {p.images && p.images.length > 1 && <div className="mt-10"><h2 className="font-serif text-3xl font-semibold">Galleria</h2><div className="mt-5 grid gap-4 sm:grid-cols-2">{p.images.slice(1,7).map((image,index)=><div key={image} className="relative aspect-[4/3] overflow-hidden bg-mist"><Image src={image} alt={`${p.title}, foto ${index+2}`} fill className="object-cover" sizes="(max-width:640px) 100vw, 50vw"/></div>)}</div></div>}
