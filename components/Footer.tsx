@@ -9,6 +9,10 @@ export function Footer() {
       <div>
         <Image src="/images/starthome-real-estate-logo.webp" width={680} height={655} alt="STARTHOME REAL ESTATE" className="mb-5 h-auto w-44"/>
         <p className="text-sm leading-7 text-white/60">Persone, case, territorio. Consulenza immobiliare indipendente tra Padova e la Riviera del Brenta.</p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="rounded-sm border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/75 transition hover:border-gold hover:text-gold" aria-label="Segui STARTHOME REAL ESTATE su Instagram">Instagram</a>
+          <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" className="rounded-sm border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/75 transition hover:border-gold hover:text-gold" aria-label="Segui STARTHOME REAL ESTATE su Facebook">Facebook</a>
+        </div>
       </div>
       <div><h3 className="mb-5 text-xs font-bold uppercase tracking-[.2em] text-gold">Contatti</h3>
         <p className="text-sm leading-7 text-white/65">{site.postalAddress}<br/><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><br/><a href={whatsappUrl("Buongiorno STARTHOME REAL ESTATE, vorrei ricevere informazioni.")} target="_blank" rel="noreferrer">Scrivici su WhatsApp</a><br/><a href={`mailto:${site.email}`}>{site.email}</a><br/>P.IVA {site.vatNumber}</p>
@@ -20,6 +24,6 @@ export function Footer() {
         <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs text-white/55">{cities.slice(0,8).map(city => <Link key={city} href={`/agenzia-immobiliare/${slugify(city)}`}>{city}</Link>)}</div>
       </div>
     </div>
-    <div className="border-t border-white/10"><div className="container-site flex flex-col gap-3 py-6 text-xs text-white/40 sm:flex-row sm:justify-between"><p>© 2026 {site.name}. P.IVA {site.vatNumber}. Tutti i diritti riservati.</p><p><Link href="/privacy">Privacy policy</Link> · Cookie policy · Instagram · Facebook</p></div></div>
+    <div className="border-t border-white/10"><div className="container-site flex flex-col gap-3 py-6 text-xs text-white/40 sm:flex-row sm:justify-between"><p>© 2026 {site.name}. P.IVA {site.vatNumber}. Tutti i diritti riservati.</p><p><Link href="/privacy">Privacy policy</Link> · Cookie policy · <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-gold">Instagram</a> · <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-gold">Facebook</a></p></div></div>
   </footer>;
 }

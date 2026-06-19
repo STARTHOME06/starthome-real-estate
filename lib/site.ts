@@ -8,6 +8,10 @@ export const site = {
   address: "Via Pastore 2",
   postalAddress: "Via Pastore 2, 35010 Vigonza (PD)",
   vatNumber: "05768080284",
+  social: {
+    instagram: "https://www.instagram.com/starthome_realestate/",
+    facebook: "https://www.facebook.com/people/StartHome-RealEstate/61590992882332/",
+  },
   hours: {
     weekdays: "Lun–Ven 9:00–12:30 / 15:00–19:00",
     saturday: "Sabato 9:00–13:00; pomeriggio solo su appuntamento",
