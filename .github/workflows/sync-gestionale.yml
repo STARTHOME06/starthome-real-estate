@@ -3,9 +3,9 @@ name: Sincronizza immobili dal gestionale
 on:
   workflow_dispatch:
   schedule:
-    # 02:17 in Italia: sempre dentro la finestra 21:00-07:00 richiesta dal fornitore.
-    - cron: "17 0 * * *"
-    - cron: "17 1 * * *"
+    # Più tentativi nella finestra notturna: GitHub può ritardare i job pianificati.
+    # Il controllo Europe/Rome qui sotto impedisce comunque esecuzioni fuori 21:00-07:00.
+    - cron: "17 19-23,0-5 * * *"
 
 permissions:
   contents: write
@@ -23,9 +23,7 @@ jobs:
         shell: bash
         run: |
           hour="$(TZ=Europe/Rome date +%H)"
-          if [[ "${{ github.event_name }}" == "schedule" && "$hour" == "02" ]]; then
-            echo "allowed=true" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]] && (( 10#$hour >= 21 || 10#$hour < 7 )); then
+          if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event_name }}" == "workflow_dispatch" ]] && (( 10#$hour >= 21 || 10#$hour < 7 )); then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
           else
             echo "allowed=false" >> "$GITHUB_OUTPUT"
