@@ -267,6 +267,43 @@ def parse_feed(xml_path: Path, allow_image_download: bool, max_photos: int = 12)
     return sorted(properties, key=lambda item: (not item["featured"], item["city"], item["id"]))
 
 
+def load_existing_properties(output: Path) -> list[dict]:
+    if not output.exists():
+        return []
+    try:
+        value = json.loads(output.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    return value if isinstance(value, list) else []
+
+
+def referenced_gestionale_images(properties: list[dict]) -> set[str]:
+    referenced: set[str] = set()
+    prefix = "/images/gestionale/"
+    for property_data in properties:
+        paths = [
+            property_data.get("image"),
+            *(property_data.get("images") or []),
+            *(property_data.get("floorplans") or []),
+        ]
+        for path in paths:
+            if isinstance(path, str) and path.startswith(prefix):
+                referenced.add(Path(path).name)
+    return referenced
+
+
+def remove_orphaned_images(properties: list[dict]) -> int:
+    if not IMAGE_DIR.exists():
+        return 0
+    referenced = referenced_gestionale_images(properties)
+    removed = 0
+    for image_path in IMAGE_DIR.iterdir():
+        if image_path.is_file() and image_path.name.startswith("gi-") and image_path.name not in referenced:
+            image_path.unlink()
+            removed += 1
+    return removed
+
+
 def within_download_window() -> bool:
     hour = datetime.now(ZoneInfo("Europe/Rome")).hour
     return hour >= 21 or hour < 7
@@ -280,6 +317,7 @@ def main() -> None:
     parser.add_argument("--skip-images", action="store_true")
     args = parser.parse_args()
 
+    cleanup_images = False
     if args.input:
         xml_path = args.input
         properties = parse_feed(xml_path, not args.skip_images)
@@ -310,17 +348,28 @@ def main() -> None:
             else:
                 log("Download immagini disattivato: uso immagini provvisorie del sito")
             properties = parse_feed(xml_files[0], download_images, max_photos)
+            cleanup_images = download_images
 
     if not properties:
         raise SystemExit("Il feed non contiene annunci pubblicabili: dati esistenti non modificati")
 
+    existing_properties = load_existing_properties(args.output)
+    existing_slugs = {item.get("slug") for item in existing_properties if item.get("slug")}
+    current_slugs = {item.get("slug") for item in properties if item.get("slug")}
+    removed_properties = existing_slugs - current_slugs
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(properties, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    removed_images = remove_orphaned_images(properties) if cleanup_images else 0
     try:
         output_name = args.output.relative_to(ROOT)
     except ValueError:
         output_name = args.output
     print(f"Sincronizzati {len(properties)} immobili in {output_name}")
+    if removed_properties:
+        print(f"Rimossi {len(removed_properties)} immobili non più presenti nel gestionale")
+    if cleanup_images:
+        print(f"Eliminate {removed_images} immagini non più utilizzate")
 
 
 if __name__ == "__main__":
