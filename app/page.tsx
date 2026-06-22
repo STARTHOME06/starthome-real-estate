@@ -16,9 +16,9 @@ const services = [
 ];
 
 const proofPoints = [
-  ["53", "immobili sincronizzati dal gestionale"],
+  [String(properties.length), "immobili sincronizzati dal gestionale"],
   ["15", "zone presidiate tra Padova, Riviera e Miranese"],
-  ["24", "planimetrie già disponibili negli annunci"],
+  [String(properties.filter((property) => property.floorplans?.length).length), "immobili con planimetrie disponibili"],
 ];
 
 export default function Home() {
