@@ -1144,14 +1144,14 @@
       "/images/gestionale/gi-5000327-0.jpg",
       "/images/gestionale/gi-5000327-1.jpg",
       "/images/gestionale/gi-5000327-2.jpg",
-      "/images/gestionale/gi-5000327-3.jpg",
-      "/images/gestionale/gi-5000327-4.jpg",
+      "/images/gestionale/gi-5000327-3.png",
+      "/images/gestionale/gi-5000327-4.png",
       "/images/gestionale/gi-5000327-5.jpg",
-      "/images/gestionale/gi-5000327-6.jpg",
-      "/images/gestionale/gi-5000327-7.jpg",
+      "/images/gestionale/gi-5000327-6.png",
+      "/images/gestionale/gi-5000327-7.png",
       "/images/gestionale/gi-5000327-8.jpg",
-      "/images/gestionale/gi-5000327-9.jpg",
-      "/images/gestionale/gi-5000327-10.jpg",
+      "/images/gestionale/gi-5000327-9.png",
+      "/images/gestionale/gi-5000327-10.png",
       "/images/gestionale/gi-5000327-11.jpg"
     ],
     "floorplans": [
@@ -1162,7 +1162,7 @@
     "address": "via roma 150",
     "latitude": 45.456092,
     "longitude": 12.0304603,
-    "updatedAt": "2026-05-09 12:09:50",
+    "updatedAt": "2026-07-17 12:30:22",
     "source": "gestionale"
   },
   {
@@ -1272,24 +1272,30 @@
     "livingKitchen": true,
     "floor": "1° piano",
     "energy": "A4",
-    "image": "/images/gestionale/gi-5045885-0.jpg",
+    "image": "/images/gestionale/gi-5045885-0.png",
     "images": [
-      "/images/gestionale/gi-5045885-0.jpg",
+      "/images/gestionale/gi-5045885-0.png",
       "/images/gestionale/gi-5045885-1.jpg",
       "/images/gestionale/gi-5045885-2.jpg",
       "/images/gestionale/gi-5045885-3.jpg",
-      "/images/gestionale/gi-5045885-4.jpg",
-      "/images/gestionale/gi-5045885-5.jpg",
+      "/images/gestionale/gi-5045885-4.png",
+      "/images/gestionale/gi-5045885-5.png",
       "/images/gestionale/gi-5045885-6.jpg",
-      "/images/gestionale/gi-5045885-7.jpg"
+      "/images/gestionale/gi-5045885-7.jpg",
+      "/images/gestionale/gi-5045885-8.jpg",
+      "/images/gestionale/gi-5045885-9.jpg",
+      "/images/gestionale/gi-5045885-10.jpg",
+      "/images/gestionale/gi-5045885-11.jpg"
     ],
-    "floorplans": [],
+    "floorplans": [
+      "/images/gestionale/gi-5045885-12.jpg"
+    ],
     "featured": true,
     "description": "In un contesto ricco di storia e carattere, prende vita un raffinato intervento di restauro che riporta all’antico splendore una prestigiosa villa del primo ’900, trasformandola in un esclusivo progetto residenziale dove tradizione e contemporaneità si incontrano in perfetta armonia. Ogni spazio è pensato per custodire e valorizzare l’anima originaria dell’edificio: gli eleganti archi a botte, le caratteristiche travature e i dettagli architettonici d’epoca vengono recuperati con cura artigianale, diventando protagonisti di ambienti dal forte valore estetico e identitario. La ristrutturazione prevede un attento equilibrio tra conservazione e innovazione, con l’inserimento di tecnologie moderne e soluzioni abitative pensate per garantire comfort, efficienza energetica e qualità della vita, senza rinunciare al fascino autentico della storia. Vivere qui significa abitare in un luogo che racconta il passato e accoglie il presente: una residenza dal carattere distintivo, dove ogni dettaglio architettonico diventa parte di un’esperienza abitativa unica. Un progetto pensato per chi cerca eleganza, autenticità e valore nel tempo. Nello specifico qui vi proponiamo una delle nove unità. Appartamento Piano Primo su due livelli La soluzione si apre con un ampia zona giorno da 20mq con scala a vista. Proseguendo troviamo una sala pranzo-cucina, antibagno e bagno. Salendo le scale nel piano nobile della villa, troviamo due ampie camere matrimoniali e un ulteriore bagno. A completare il tutto giardino privato e 2 posti auto coperti. Prezzo:240.000 Ape: A4 Rif: PI-12 StartHome 351.4769272 richieste@starthome.it",
     "address": "Via roma 102",
     "latitude": 45.456092,
     "longitude": 12.0304603,
-    "updatedAt": "2026-06-16 19:37:46",
+    "updatedAt": "2026-07-17 15:42:52",
     "source": "gestionale"
   },
   {
@@ -1314,24 +1320,27 @@
     "image": "/images/gestionale/gi-4906105-0.jpg",
     "images": [
       "/images/gestionale/gi-4906105-0.jpg",
-      "/images/gestionale/gi-4906105-1.png",
-      "/images/gestionale/gi-4906105-2.jpg",
+      "/images/gestionale/gi-4906105-1.jpg",
+      "/images/gestionale/gi-4906105-2.png",
       "/images/gestionale/gi-4906105-3.jpg",
-      "/images/gestionale/gi-4906105-4.png",
+      "/images/gestionale/gi-4906105-4.jpg",
       "/images/gestionale/gi-4906105-5.png",
-      "/images/gestionale/gi-4906105-6.jpg",
+      "/images/gestionale/gi-4906105-6.png",
       "/images/gestionale/gi-4906105-7.jpg",
       "/images/gestionale/gi-4906105-8.jpg",
       "/images/gestionale/gi-4906105-9.jpg",
-      "/images/gestionale/gi-4906105-10.jpg"
+      "/images/gestionale/gi-4906105-10.jpg",
+      "/images/gestionale/gi-4906105-11.jpg"
     ],
-    "floorplans": [],
+    "floorplans": [
+      "/images/gestionale/gi-4906105-12.jpg"
+    ],
     "featured": true,
     "description": "In un contesto ricco di storia e carattere, prende vita un raffinato intervento di restauro che riporta all’antico splendore una prestigiosa villa del primo ’900, trasformandola in un esclusivo progetto residenziale dove tradizione e contemporaneità si incontrano in perfetta armonia. Ogni spazio è pensato per custodire e valorizzare l’anima originaria dell’edificio: gli eleganti archi a botte, le caratteristiche travature e i dettagli architettonici d’epoca vengono recuperati con cura artigianale, diventando protagonisti di ambienti dal forte valore estetico e identitario. La ristrutturazione prevede un attento equilibrio tra conservazione e innovazione, con l’inserimento di tecnologie moderne e soluzioni abitative pensate per garantire comfort, efficienza energetica e qualità della vita, senza rinunciare al fascino autentico della storia. Vivere qui significa abitare in un luogo che racconta il passato e accoglie il presente: una residenza dal carattere distintivo, dove ogni dettaglio architettonico diventa parte di un’esperienza abitativa unica. Un progetto pensato per chi cerca eleganza, autenticità e valore nel tempo. Nello specifico qui vi proponiamo una delle nove unità. Appartamento Piano Terra con Giardino Privato. La soluzione si apre con un ampia zona giorno caratterizzata da due volte a botte con ampie vetrate da 3 metri di luce. Proseguendo troviamo una sala pranzo-cucina separata da una ampia vetrata. L'abitazione ha 3 ampie camere e due bagni di cui uno munito di angolo lavanderia. A completare il tutto giardino privato e 2 posti auto coperti. Prezzo: 275.000 Ape: A4 Rif: PI-C1 StartHome 351.4769272 richieste@starthome.it",
     "address": "Via roma 102",
     "latitude": 45.45527,
     "longitude": 12.03403,
-    "updatedAt": "2026-05-27 18:09:06",
+    "updatedAt": "2026-07-17 15:36:00",
     "source": "gestionale"
   },
   {
@@ -1353,30 +1362,29 @@
     "livingKitchen": true,
     "floor": "1° piano",
     "energy": "A4",
-    "image": "/images/gestionale/gi-4906259-0.png",
+    "image": "/images/gestionale/gi-4906259-0.jpg",
     "images": [
-      "/images/gestionale/gi-4906259-0.png",
+      "/images/gestionale/gi-4906259-0.jpg",
       "/images/gestionale/gi-4906259-1.jpg",
-      "/images/gestionale/gi-4906259-2.png",
-      "/images/gestionale/gi-4906259-3.jpg",
-      "/images/gestionale/gi-4906259-4.jpg",
+      "/images/gestionale/gi-4906259-2.jpg",
+      "/images/gestionale/gi-4906259-3.png",
+      "/images/gestionale/gi-4906259-4.png",
       "/images/gestionale/gi-4906259-5.jpg",
-      "/images/gestionale/gi-4906259-6.png",
-      "/images/gestionale/gi-4906259-7.png",
+      "/images/gestionale/gi-4906259-6.jpg",
+      "/images/gestionale/gi-4906259-7.jpg",
       "/images/gestionale/gi-4906259-8.jpg",
       "/images/gestionale/gi-4906259-9.jpg",
-      "/images/gestionale/gi-4906259-10.jpg",
-      "/images/gestionale/gi-4906259-11.png"
+      "/images/gestionale/gi-4906259-10.jpg"
     ],
     "floorplans": [
-      "/images/gestionale/gi-4906259-13.jpg"
+      "/images/gestionale/gi-4906259-11.jpg"
     ],
     "featured": true,
     "description": "In un contesto ricco di storia e carattere, prende vita un raffinato intervento di restauro che riporta all’antico splendore una prestigiosa villa del primo ’900, trasformandola in un esclusivo progetto residenziale dove tradizione e contemporaneità si incontrano in perfetta armonia. Ogni spazio è pensato per custodire e valorizzare l’anima originaria dell’edificio: gli eleganti archi a botte, le caratteristiche travature e i dettagli architettonici d’epoca vengono recuperati con cura artigianale, diventando protagonisti di ambienti dal forte valore estetico e identitario. La ristrutturazione prevede un attento equilibrio tra conservazione e innovazione, con l’inserimento di tecnologie moderne e soluzioni abitative pensate per garantire comfort, efficienza energetica e qualità della vita, senza rinunciare al fascino autentico della storia. Vivere qui significa abitare in un luogo che racconta il passato e accoglie il presente: una residenza dal carattere distintivo, dove ogni dettaglio architettonico diventa parte di un’esperienza abitativa unica. Un progetto pensato per chi cerca eleganza, autenticità e valore nel tempo. Nello specifico qui vi proponiamo una delle nove unità. Appartamento Piano Primo su due livelli La soluzione si apre con un ampia zona giorno da 20mq con scala a vista. Proseguendo troviamo una sala pranzo-cucina, antibagno e bagno. Salendo le scale nel piano nobile della villa, troviamo due ampie camere matrimoniali e un ulteriore bagno. A completare il tutto giardino privato e 2 posti auto coperti. Prezzo: 240.000 Ape: A4 Rif: PI-C2 StartHome 351.4769272 richieste@starthome.it",
     "address": "Via roma 102",
     "latitude": 45.456092,
     "longitude": 12.0304603,
-    "updatedAt": "2026-05-07 16:51:44",
+    "updatedAt": "2026-07-17 15:39:44",
     "source": "gestionale"
   },
   {
@@ -1398,30 +1406,30 @@
     "livingKitchen": true,
     "floor": "1° piano",
     "energy": "A4",
-    "image": "/images/gestionale/gi-4906304-0.png",
+    "image": "/images/gestionale/gi-4906304-0.jpg",
     "images": [
-      "/images/gestionale/gi-4906304-0.png",
-      "/images/gestionale/gi-4906304-1.jpg",
-      "/images/gestionale/gi-4906304-2.png",
+      "/images/gestionale/gi-4906304-0.jpg",
+      "/images/gestionale/gi-4906304-1.png",
+      "/images/gestionale/gi-4906304-2.jpg",
       "/images/gestionale/gi-4906304-3.png",
-      "/images/gestionale/gi-4906304-4.jpg",
+      "/images/gestionale/gi-4906304-4.png",
       "/images/gestionale/gi-4906304-5.jpg",
       "/images/gestionale/gi-4906304-6.jpg",
       "/images/gestionale/gi-4906304-7.jpg",
       "/images/gestionale/gi-4906304-8.jpg",
       "/images/gestionale/gi-4906304-9.jpg",
-      "/images/gestionale/gi-4906304-10.png",
-      "/images/gestionale/gi-4906304-11.jpg"
+      "/images/gestionale/gi-4906304-10.jpg",
+      "/images/gestionale/gi-4906304-11.png"
     ],
     "floorplans": [
-      "/images/gestionale/gi-4906304-12.png"
+      "/images/gestionale/gi-4906304-14.png"
     ],
     "featured": true,
     "description": "In un contesto ricco di storia e carattere, prende vita un raffinato intervento di restauro che riporta all’antico splendore una prestigiosa villa del primo ’900, trasformandola in un esclusivo progetto residenziale dove tradizione e contemporaneità si incontrano in perfetta armonia. Ogni spazio è pensato per custodire e valorizzare l’anima originaria dell’edificio: gli eleganti archi a botte, le caratteristiche travature e i dettagli architettonici d’epoca vengono recuperati con cura artigianale, diventando protagonisti di ambienti dal forte valore estetico e identitario. La ristrutturazione prevede un attento equilibrio tra conservazione e innovazione, con l’inserimento di tecnologie moderne e soluzioni abitative pensate per garantire comfort, efficienza energetica e qualità della vita, senza rinunciare al fascino autentico della storia. Vivere qui significa abitare in un luogo che racconta il passato e accoglie il presente: una residenza dal carattere distintivo, dove ogni dettaglio architettonico diventa parte di un’esperienza abitativa unica. Un progetto pensato per chi cerca eleganza, autenticità e valore nel tempo. Nello specifico qui vi proponiamo una delle nove unità. Appartamento Primo e ultimo piano. La soluzione si apre con un ampia zona giorno openspace da 50mq caratterizzata da tre volte a botte con ampie vetrate da 3 metri di luce. Proseguendo troviamo 3 ampie camere, due bagni di cui uno munito di angolo lavanderia e un pratico ripostiglio. La soluzione si distingue dalle altre per la presenza in tutto l'appartamento di ampi velux per migliorare la luminosità interna. A completare il tutto 2 posti auto coperti. Prezzo: 280.000 Ape: A4 Rif: PI-C3 StartHome 351.4769272 richieste@starthome.it",
     "address": "Via roma 102",
     "latitude": 45.456092,
     "longitude": 12.0304603,
-    "updatedAt": "2026-05-07 17:59:45",
+    "updatedAt": "2026-07-17 15:34:38",
     "source": "gestionale"
   },
   {
@@ -1447,26 +1455,25 @@
     "images": [
       "/images/gestionale/gi-4906469-0.jpg",
       "/images/gestionale/gi-4906469-1.jpg",
-      "/images/gestionale/gi-4906469-2.jpg",
+      "/images/gestionale/gi-4906469-2.png",
       "/images/gestionale/gi-4906469-3.jpg",
-      "/images/gestionale/gi-4906469-4.jpg",
-      "/images/gestionale/gi-4906469-5.jpg",
+      "/images/gestionale/gi-4906469-4.png",
+      "/images/gestionale/gi-4906469-5.png",
       "/images/gestionale/gi-4906469-6.jpg",
-      "/images/gestionale/gi-4906469-7.jpg",
-      "/images/gestionale/gi-4906469-8.jpg",
+      "/images/gestionale/gi-4906469-7.png",
+      "/images/gestionale/gi-4906469-8.png",
       "/images/gestionale/gi-4906469-9.jpg",
-      "/images/gestionale/gi-4906469-10.jpg",
-      "/images/gestionale/gi-4906469-11.jpg"
+      "/images/gestionale/gi-4906469-10.jpg"
     ],
     "floorplans": [
-      "/images/gestionale/gi-4906469-13.jpg"
+      "/images/gestionale/gi-4906469-11.jpg"
     ],
     "featured": true,
     "description": "La casa perfetta per la tua famiglia: spazio, sicurezza e comfort in una nuova bivilla in classe A4. All’interno di un elegante e tranquillo residence di nuova costruzione, nasce una quadrivilla pensata per le famiglie con figli, dove ogni ambiente è progettato per vivere serenamente la quotidianità, con spazi ampi, funzionali e sicuri. Il cuore della casa è la zona giorno open space di 50mq, luminosa e accogliente, ideale per condividere i momenti più importanti: i compiti sul tavolo, le cene in famiglia, il gioco dei bambini sempre sotto lo sguardo dei genitori. L’accesso diretto agli spazi esterni rende la vita domestica ancora più pratica e piacevole. Infatti all'esterno delle ampie vetrate troviamo un portico di 40mq. La zona notte offre tutto ciò che serve a una famiglia: 2 camere dedicate ai figli, spaziose e personalizzabili per crescere insieme a loro 2 bagni, comodi per gestire senza stress le routine quotidiane Una confortevole master suite per i genitori, con cabina armadio in camera, un vero spazio riservato per rilassarsi a fine giornata ️ All’esterno, la casa diventa un piccolo mondo per i bambini: Giardino privato di circa 500 mq, perfetto per giocare all’aria aperta, organizzare feste di compleanno o far correre in sicurezza gli animali domestici Ampio terrazzo, ideale per pranzi e cene in famiglia durante la bella stagione Garage spazioso comodo per auto, biciclette, passeggini e tutto ciò che serve alla vita familiare La costruzione in classe energetica A4 garantisce ambienti sempre confortevoli, bollette più leggere e un’attenzione concreta al futuro dei propri figli, grazie a consumi ridotti e tecnologie moderne. Una casa pensata per crescere insieme alla tua famiglia, in un contesto sicuro, moderno e ricco di spazi da vivere ogni giorno. Prezzo: 390.000 Ape: A4 Rif: PI-C4 StartHome 351.4769272 richieste@starthome.it",
     "address": "via roma 150",
     "latitude": 45.456092,
     "longitude": 12.0304603,
-    "updatedAt": "2026-05-09 12:04:53",
+    "updatedAt": "2026-07-17 12:27:31",
     "source": "gestionale"
   },
   {
