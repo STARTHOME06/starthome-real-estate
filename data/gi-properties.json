@@ -65,8 +65,8 @@
       "/images/gestionale/gi-4995950-2.png",
       "/images/gestionale/gi-4995950-3.jpg",
       "/images/gestionale/gi-4995950-4.png",
-      "/images/gestionale/gi-4995950-5.png",
-      "/images/gestionale/gi-4995950-6.jpg",
+      "/images/gestionale/gi-4995950-5.jpg",
+      "/images/gestionale/gi-4995950-6.png",
       "/images/gestionale/gi-4995950-7.png",
       "/images/gestionale/gi-4995950-8.png",
       "/images/gestionale/gi-4995950-9.png"
@@ -77,7 +77,7 @@
     "address": "Via Dandolo",
     "latitude": 45.53588,
     "longitude": 11.97203,
-    "updatedAt": "2026-04-30 11:42:24",
+    "updatedAt": "2026-09-18 10:29:36",
     "source": "gestionale"
   },
   {
@@ -2223,26 +2223,15 @@
     "livingKitchen": true,
     "floor": "1° piano",
     "energy": "In definizione",
-    "image": "/images/gestionale/gi-5133661-0.png",
-    "images": [
-      "/images/gestionale/gi-5133661-0.png",
-      "/images/gestionale/gi-5133661-1.png",
-      "/images/gestionale/gi-5133661-2.png",
-      "/images/gestionale/gi-5133661-3.png",
-      "/images/gestionale/gi-5133661-4.png",
-      "/images/gestionale/gi-5133661-5.png",
-      "/images/gestionale/gi-5133661-6.png",
-      "/images/gestionale/gi-5133661-7.png",
-      "/images/gestionale/gi-5133661-8.png",
-      "/images/gestionale/gi-5133661-9.png"
-    ],
+    "image": "/images/appartamento-vigonza.webp",
+    "images": [],
     "floorplans": [],
     "featured": true,
-    "description": "Scopri questo splendido appartamento trilocale, situato al primo piano di una palazzina elegante e moderna composta da sole quattro unità. Con una superficie interna generosa di 95 mq, questo immobile è caratterizzato da finiture di alto pregio che conferiscono un'atmosfera raffinata e accogliente. L'appartamento vanta pavimenti in legno di rovere, creando un ambiente caldo e sofisticato. La disposizione degli spazi interni è ottimale per garantire comfort e funzionalità: due camere spaziose ideali per famiglie o professionisti alla ricerca del proprio rifugio urbano. A completare questa soluzione esclusiva ci sono due terrazze, tra cui una straordinaria terrazza di ben 35 mq perfetta per momenti conviviali all'aperto. Nel dettaglio: - Soggiorno con Angolo cottura - Due camere Matrimoniali - Due Bagni - Poggiolo - Terrazza di 35 mq - Garage Doppio Le spese condominiali sono incredibilmente basse, solo 40 euro al mese, rendendo questa proprietà ancora più attraente. Gli impianti moderni dotati delle ultime tecnologie assicurano efficienza energetica e comodità quotidiana. Posizionato strategicamente nel cuore pulsante di Villanova di Camposampiero, l'immobile offre facile accesso a tutti i servizi locali come negozi, ristoranti e scuole. Inoltre, la vicinanza alla tangenziale ed all'autostrada rende comodo il collegamento sia con la provincia di Padova che con quella di Venezia. Prezzo: 250.000,00 € Rif: VN-05 Ape: A4 Non perdere l'opportunità unica d'acquistare questo magnifico appartamento! Contatta subito la nostra agenzia per ulteriori informazioni o per prenotare una visita.",
+    "description": "TRILOCALE CON TERRAZZA ABITABILE DI 35 MQ NEL CENTRO DI VILLANOVA DI CAMPOSAMPIERO Nel cuore di Villanova di Camposampiero, comodo a tutti i principali servizi del paese, proponiamo un elegante appartamento al primo piano di una moderna palazzina composta da sole quattro unità abitative. L’immobile sviluppa una superficie interna di circa 95 mq e si distingue per gli ambienti ampi e ben distribuiti, le finiture di pregio e il pavimento in legno di rovere, capace di donare calore e raffinatezza a tutta l’abitazione. La zona giorno è composta da un luminoso soggiorno con angolo cottura, direttamente collegato alla splendida terrazza abitabile di circa 35 mq: uno spazio esterno raro e prezioso, ideale per pranzi e cene all’aperto, momenti di relax o per creare una vera zona living estiva. La zona notte ospita due spaziose camere matrimoniali e due bagni, garantendo comfort e funzionalità sia a una famiglia sia a chi desidera una stanza aggiuntiva da utilizzare come studio o camera per gli ospiti. Completa gli spazi esterni un ulteriore poggiolo. L’abitazione è dotata di riscaldamento e raffrescamento a pavimento, una soluzione moderna che assicura una temperatura uniforme in ogni ambiente, elevato comfort abitativo ed efficienza energetica durante tutto l’anno. Nel dettaglio: Soggiorno con angolo cottura Terrazza abitabile di circa 35 mq Due camere matrimoniali Due bagni Poggiolo Riscaldamento a pavimento Raffrescamento a pavimento Garage doppio Le spese condominiali sono contenute e ammontano a circa 40 euro mensili. La posizione centrale consente di raggiungere comodamente negozi, scuole, attività commerciali e tutti i servizi essenziali del paese. La vicinanza alle principali vie di comunicazione, alla tangenziale e all’autostrada permette inoltre rapidi collegamenti con Padova, Venezia e i comuni limitrofi. Una soluzione moderna ed esclusiva, ideale per chi cerca ampi spazi, una grande terrazza da vivere e la comodità del centro paese. Non perdere l'opportunità unica d'acquistare questo magnifico appartamento! Contatta subito la nostra agenzia per ulteriori informazioni o per prenotare una visita. Prezzo: 250.000,00 € Rif: VN-05 Ape: A4 StartHome 351.4769272 info@starthome.it",
     "address": "Via Giuseppe Verdi",
     "latitude": 45.49064,
     "longitude": 11.97422,
-    "updatedAt": "2026-09-17 16:58:59",
+    "updatedAt": "2026-09-18 19:29:52",
     "source": "gestionale"
   },
   {
