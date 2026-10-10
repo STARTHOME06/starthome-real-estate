@@ -916,7 +916,7 @@
     "zone": "Mirano - Centro",
     "contract": "vendita",
     "type": "Villa",
-    "price": 449000,
+    "price": 405000,
     "sqm": 200,
     "rooms": 6,
     "bedrooms": 4,
@@ -948,7 +948,7 @@
     "address": "VIA ALDO MORO 12",
     "latitude": 45.48891,
     "longitude": 12.11247,
-    "updatedAt": "2026-09-16 17:56:12",
+    "updatedAt": "2026-10-10 11:59:52",
     "source": "gestionale"
   },
   {
