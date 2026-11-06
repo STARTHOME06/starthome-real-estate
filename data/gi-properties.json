@@ -623,11 +623,11 @@
     "image": "/images/gestionale/gi-5212668-0.png",
     "images": [
       "/images/gestionale/gi-5212668-0.png",
-      "/images/gestionale/gi-5212668-1.jpg",
-      "/images/gestionale/gi-5212668-2.jpg",
-      "/images/gestionale/gi-5212668-3.png",
+      "/images/gestionale/gi-5212668-1.png",
+      "/images/gestionale/gi-5212668-2.png",
+      "/images/gestionale/gi-5212668-3.jpg",
       "/images/gestionale/gi-5212668-4.png",
-      "/images/gestionale/gi-5212668-5.png",
+      "/images/gestionale/gi-5212668-5.jpg",
       "/images/gestionale/gi-5212668-6.png",
       "/images/gestionale/gi-5212668-7.png",
       "/images/gestionale/gi-5212668-8.jpg",
@@ -641,7 +641,7 @@
     "address": "Via Riviera del Brenta",
     "latitude": 45.4164157,
     "longitude": 12.0305169,
-    "updatedAt": "2026-11-03 13:24:37",
+    "updatedAt": "2026-11-06 18:21:10",
     "source": "gestionale"
   },
   {
