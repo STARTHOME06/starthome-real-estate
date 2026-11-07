@@ -180,16 +180,22 @@ def sync_images(
                         raise RuntimeError("Immagine vuota")
                 except Exception as error:
                     log(f"Avviso: immagine non scaricata {url}: {error}")
-                    continue
-                matching = next(
-                    (path for path in prior_versions if filecmp.cmp(path, candidate, shallow=False)),
-                    None,
-                )
-                if matching is not None:
-                    filename = matching.name
-                    destination = matching
+                    if not prior_versions:
+                        continue
+                    # A temporary feed failure must not remove a previously
+                    # published photo from the property or the next cleanup.
+                    destination = prior_versions[0]
+                    filename = destination.name
                 else:
-                    shutil.move(str(candidate), destination)
+                    matching = next(
+                        (path for path in prior_versions if filecmp.cmp(path, candidate, shallow=False)),
+                        None,
+                    )
+                    if matching is not None:
+                        filename = matching.name
+                        destination = matching
+                    else:
+                        shutil.move(str(candidate), destination)
         if not destination.exists():
             continue
         public_path = f"/images/gestionale/{filename}"
