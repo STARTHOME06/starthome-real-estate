@@ -1,6 +1,8 @@
 import importlib.util
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
+from unittest.mock import patch
 from pathlib import Path
 
 
@@ -49,6 +51,45 @@ class GestionaleSyncTests(unittest.TestCase):
             self.assertTrue(current.exists())
             self.assertFalse(orphan.exists())
             self.assertTrue(unrelated.exists())
+
+
+    def test_extension_change_with_same_content_reuses_original_asset(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            image_dir = Path(tmp)
+            original = image_dir / "gi-42-7.jpg"
+            original.write_bytes(b"unchanged-photo")
+            ann = ET.fromstring(
+                "<annuncio><file_allegati><allegato>"
+                "<id>7</id><file_path>https://example.com/photo.png</file_path>"
+                "</allegato></file_allegati></annuncio>"
+            )
+            def fake_download(_url, destination, timeout=25):
+                destination.write_bytes(b"unchanged-photo")
+            with patch.object(sync, "IMAGE_DIR", image_dir), patch.object(sync, "download", fake_download):
+                photos, plans = sync.sync_images(ann, "42", True, 12)
+            self.assertEqual(photos, ["/images/gestionale/gi-42-7.jpg"])
+            self.assertEqual(plans, [])
+            self.assertTrue(original.exists())
+            self.assertFalse((image_dir / "gi-42-7.png").exists())
+
+    def test_changed_content_with_new_extension_creates_new_asset(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            image_dir = Path(tmp)
+            original = image_dir / "gi-42-7.jpg"
+            original.write_bytes(b"old-photo")
+            ann = ET.fromstring(
+                "<annuncio><file_allegati><allegato>"
+                "<id>7</id><file_path>https://example.com/photo.png</file_path>"
+                "</allegato></file_allegati></annuncio>"
+            )
+            def fake_download(_url, destination, timeout=25):
+                destination.write_bytes(b"new-photo")
+            with patch.object(sync, "IMAGE_DIR", image_dir), patch.object(sync, "download", fake_download):
+                photos, plans = sync.sync_images(ann, "42", True, 12)
+            self.assertEqual(photos, ["/images/gestionale/gi-42-7.png"])
+            self.assertEqual(plans, [])
+            self.assertEqual(original.read_bytes(), b"old-photo")
+            self.assertEqual((image_dir / "gi-42-7.png").read_bytes(), b"new-photo")
 
 
 if __name__ == "__main__":
