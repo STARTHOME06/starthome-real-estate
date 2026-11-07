@@ -92,5 +92,24 @@ class GestionaleSyncTests(unittest.TestCase):
             self.assertEqual((image_dir / "gi-42-7.png").read_bytes(), b"new-photo")
 
 
+    def test_failed_download_with_changed_extension_preserves_existing_photo(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            image_dir = Path(tmp)
+            original = image_dir / "gi-42-7.jpg"
+            original.write_bytes(b"previous-photo")
+            ann = ET.fromstring(
+                "<annuncio><file_allegati><allegato>"
+                "<id>7</id><file_path>https://example.com/photo.png</file_path>"
+                "</allegato></file_allegati></annuncio>"
+            )
+            def fake_download(_url, _destination, timeout=25):
+                raise OSError("temporary failure")
+            with patch.object(sync, "IMAGE_DIR", image_dir), patch.object(sync, "download", fake_download):
+                photos, plans = sync.sync_images(ann, "42", True, 12)
+            self.assertEqual(photos, ["/images/gestionale/gi-42-7.jpg"])
+            self.assertEqual(plans, [])
+            self.assertEqual(original.read_bytes(), b"previous-photo")
+
+
 if __name__ == "__main__":
     unittest.main()
