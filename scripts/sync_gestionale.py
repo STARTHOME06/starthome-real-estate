@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import filecmp
 import html
 import json
 import os
@@ -163,13 +164,39 @@ def sync_images(
         attachment_id = text(attachment, "id", str(index))
         filename = f"gi-{slugify(property_id)}-{slugify(attachment_id)}{image_extension(url)}"
         destination = IMAGE_DIR / filename
-        if allow_download and not destination.exists():
-            try:
-                download(url, destination, timeout=25)
-            except Exception as error:
-                log(f"Avviso: immagine non scaricata {url}: {error}")
-                continue
-        if not destination.exists() and allow_download:
+        if not destination.exists():
+            # Preserve an earlier filename when the feed changes only the
+            # extension, not the image bytes. Avoid unnecessary deployments.
+            stem = f"gi-{slugify(property_id)}-{slugify(attachment_id)}"
+            prior_versions = sorted(
+                path for path in IMAGE_DIR.glob(f"{stem}.*")
+                if path.is_file() and path != destination
+            )
+            with tempfile.TemporaryDirectory(prefix="gi-image-") as temp_name:
+                candidate = Path(temp_name) / filename
+                try:
+                    download(url, candidate, timeout=25)
+                    if not candidate.is_file() or candidate.stat().st_size == 0:
+                        raise RuntimeError("Immagine vuota")
+                except Exception as error:
+                    log(f"Avviso: immagine non scaricata {url}: {error}")
+                    if not prior_versions:
+                        continue
+                    # A temporary feed failure must not remove a previously
+                    # published photo from the property or the next cleanup.
+                    destination = prior_versions[0]
+                    filename = destination.name
+                else:
+                    matching = next(
+                        (path for path in prior_versions if filecmp.cmp(path, candidate, shallow=False)),
+                        None,
+                    )
+                    if matching is not None:
+                        filename = matching.name
+                        destination = matching
+                    else:
+                        shutil.move(str(candidate), destination)
+        if not destination.exists():
             continue
         public_path = f"/images/gestionale/{filename}"
         is_floorplan = attachment.get("planimetria", "0") == "1"
