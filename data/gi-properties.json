@@ -2014,7 +2014,9 @@
       "/images/gestionale/gi-5132522-6.png",
       "/images/gestionale/gi-5132522-7.png",
       "/images/gestionale/gi-5132522-8.png",
-      "/images/gestionale/gi-5132522-9.png"
+      "/images/gestionale/gi-5132522-9.png",
+      "/images/gestionale/gi-5132522-10.png",
+      "/images/gestionale/gi-5132522-11.png"
     ],
     "floorplans": [],
     "featured": true,
@@ -2022,7 +2024,7 @@
     "address": "Via Bonaventura da Peraga",
     "latitude": 45.44133,
     "longitude": 12.01842,
-    "updatedAt": "2026-09-15 18:54:59",
+    "updatedAt": "2026-11-13 18:13:48",
     "source": "gestionale"
   },
   {
@@ -2056,7 +2058,8 @@
       "/images/gestionale/gi-5132563-7.png",
       "/images/gestionale/gi-5132563-8.png",
       "/images/gestionale/gi-5132563-9.png",
-      "/images/gestionale/gi-5132563-10.png"
+      "/images/gestionale/gi-5132563-10.png",
+      "/images/gestionale/gi-5132563-11.png"
     ],
     "floorplans": [],
     "featured": true,
@@ -2064,7 +2067,7 @@
     "address": "Via Bonaventura da Peraga",
     "latitude": 45.44467,
     "longitude": 11.96894,
-    "updatedAt": "2026-09-15 18:57:26",
+    "updatedAt": "2026-11-13 18:12:16",
     "source": "gestionale"
   },
   {
@@ -2097,7 +2100,9 @@
       "/images/gestionale/gi-5132566-6.png",
       "/images/gestionale/gi-5132566-7.png",
       "/images/gestionale/gi-5132566-8.png",
-      "/images/gestionale/gi-5132566-9.png"
+      "/images/gestionale/gi-5132566-9.png",
+      "/images/gestionale/gi-5132566-10.png",
+      "/images/gestionale/gi-5132566-11.png"
     ],
     "floorplans": [],
     "featured": true,
@@ -2105,7 +2110,7 @@
     "address": "Via Bonaventura da Peraga",
     "latitude": 45.44467,
     "longitude": 11.96894,
-    "updatedAt": "2026-09-15 18:57:55",
+    "updatedAt": "2026-11-13 17:57:02",
     "source": "gestionale"
   },
   {
