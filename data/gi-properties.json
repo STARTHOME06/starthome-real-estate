@@ -1392,7 +1392,7 @@
     "zone": "Mellaredo",
     "contract": "vendita",
     "type": "Appartamento",
-    "price": 165000,
+    "price": 159000,
     "sqm": 76,
     "rooms": 3,
     "bedrooms": 2,
@@ -1424,7 +1424,7 @@
     "address": "Via Brenta 3",
     "latitude": 45.45875,
     "longitude": 11.99248,
-    "updatedAt": "2026-11-05 12:51:51",
+    "updatedAt": "2026-11-23 10:17:58",
     "source": "gestionale"
   },
   {
